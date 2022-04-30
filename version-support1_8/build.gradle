@@ -1,0 +1,57 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
+}
+
+configurations {
+    extraLibs
+}
+
+def pluginName = 'LyraLibs-VersionSupport'
+def code = 0
+
+dependencies {
+    implementation project(":version-support")
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    // jetbrains annotations
+    compileOnly 'org.jetbrains:annotations:20.1.0'
+    // spigot 1.8
+    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
+    configurations.compileOnly.extendsFrom(configurations.extraLibs)
+}
+
+task updateBuildNumber {
+    def versionPropsFile = file 'version.properties'
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    code = versionProps['VERSION_CODE'].toInteger() + 1
+
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    archiveFileName = "LyraLibs-VS1_8 b" + code.toString() + ".jar"
+
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            "version"  : project.version.toString(),
+            "mainClass": project.group + ".$pluginName",
+            "name"     : pluginName,
+            "number"   : code.toString()
+    ]
+}

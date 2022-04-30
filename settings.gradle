@@ -1,0 +1,8 @@
+rootProject.name = 'LyraLibs'
+include(':core')
+include(':bukkit')
+include(':velocity')
+
+include(':version-support')
+include(':version-support1_8')
+include(':version-support1_13')

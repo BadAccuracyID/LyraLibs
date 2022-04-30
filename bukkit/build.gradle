@@ -1,0 +1,67 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
+}
+
+configurations {
+    extraLibs
+}
+
+def pluginName = 'LyraLibs-Bukkit'
+def code = 0
+
+dependencies {
+    extraLibs project(":core")
+    extraLibs project(":version-support")
+    extraLibs project(":version-support1_8")
+    extraLibs project(":version-support1_13")
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    //mongodb
+    extraLibs 'org.mongodb:mongo-java-driver:3.12.10'
+    // jedis
+    extraLibs 'redis.clients:jedis:3.7.0'
+    // gson
+    extraLibs 'com.google.code.gson:gson:2.8.6'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    // jetbrains annotations
+    compileOnly 'org.jetbrains:annotations:20.1.0'
+    // spigot 1.12
+    compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+
+    configurations.compileOnly.extendsFrom(configurations.extraLibs)
+}
+
+task updateBuildNumber {
+    def versionPropsFile = file 'version.properties'
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    code = versionProps['VERSION_CODE'].toInteger() + 1
+
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    archiveFileName = "LyraLibs-Bukkit b" + code.toString() + ".jar"
+
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            "version"  : project.version.toString(),
+            "mainClass": project.group + ".$pluginName",
+            "name"     : pluginName,
+            "number"   : code.toString()
+    ]
+}
