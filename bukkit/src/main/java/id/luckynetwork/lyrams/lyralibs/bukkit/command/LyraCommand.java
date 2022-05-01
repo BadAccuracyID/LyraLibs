@@ -88,9 +88,11 @@ public abstract class LyraCommand extends Command {
             return true;
         }
 
-        if (args.length == 0) {
-            this.sendDefaultMessage(sender);
-            return true;
+        if (args.length == 1) {
+            if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
+                this.sendDefaultMessage(sender);
+                return true;
+            }
         }
 
         this.execute(sender, args);
