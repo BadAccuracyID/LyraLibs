@@ -68,7 +68,7 @@ public abstract class LyraSubCommand {
      * @return A boolean value.
      */
     public boolean hasPermission(CommandSender sender) {
-        return sender.hasPermission(this.permission) || this.permission.isEmpty();
+        return this.permission.isEmpty() || sender.hasPermission(this.permission);
     }
 
 }

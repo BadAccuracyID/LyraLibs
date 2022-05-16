@@ -87,8 +87,10 @@ public abstract class LyraParentCommand extends Command {
      */
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-        if (!PlayerUtils.checkPermission(sender, permission, false, false)) {
-            return true;
+        if (!permission.isEmpty()) {
+            if (!PlayerUtils.checkPermission(sender, permission, false, false)) {
+                return true;
+            }
         }
 
         if (args.length == 0) {
@@ -124,8 +126,10 @@ public abstract class LyraParentCommand extends Command {
      */
     @Override
     public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
-        if (!PlayerUtils.checkPermission(sender, permission, false, true)) {
-            return null;
+        if (!permission.isEmpty()) {
+            if (!PlayerUtils.checkPermission(sender, permission, false, true)) {
+                return null;
+            }
         }
 
         if (args.length == 1) {
