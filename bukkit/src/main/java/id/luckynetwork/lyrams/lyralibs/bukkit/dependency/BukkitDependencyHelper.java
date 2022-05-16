@@ -36,6 +36,13 @@ public class BukkitDependencyHelper {
         helper.loadDir(librariesDirectory.toPath());
     }
 
+    /**
+     * It takes a JSON file and a list of dependencies to exclude, and returns a map of dependencies and their URLs
+     *
+     * @param jsonFile The file that contains the JSON array of dependencies.
+     * @param exclude A list of dependencies to exclude from the map.
+     * @return A map of dependencies.
+     */
     @Nullable
     public Map<String, String> createDependencyMapFromJsonFile(File jsonFile, List<String> exclude) {
         Map<String, String> dependencyMap = new HashMap<>();

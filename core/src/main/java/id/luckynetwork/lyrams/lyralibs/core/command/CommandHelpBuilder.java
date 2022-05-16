@@ -11,6 +11,15 @@ import java.util.List;
 @UtilityClass
 public class CommandHelpBuilder {
 
+    /**
+     * It generates a help command for a plugin
+     *
+     * @param pluginName The name of your plugin.
+     * @param version The version of the plugin
+     * @param authors A list of authors for the plugin.
+     * @param commandHelpInfo This is a list of CommandHelpInfo objects.
+     * @return A list of strings that will be sent to the player.
+     */
     public List<String> generateHelpCommand(String pluginName, String version, List<String> authors, List<CommandHelpInfo> commandHelpInfo) {
         List<String> helpCommand = new ArrayList<>();
 
@@ -24,6 +33,16 @@ public class CommandHelpBuilder {
         return helpCommand;
     }
 
+    /**
+     * It generates a help command for a plugin
+     *
+     * @param pluginName The name of your plugin.
+     * @param version The version of the plugin
+     * @param type The type of command.
+     * @param authors A list of authors of the plugin.
+     * @param commandHelpInfo This is a list of CommandHelpInfo objects.
+     * @return A list of strings.
+     */
     public List<String> generateHelpCommand(String pluginName, String version, String type, List<String> authors, List<CommandHelpInfo> commandHelpInfo) {
         List<String> helpCommand = new ArrayList<>();
 

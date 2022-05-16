@@ -8,6 +8,14 @@ import java.util.List;
 @UtilityClass
 public class DiscordHandler {
 
+    /**
+     * It sends a webhook to the specified URL with the specified title, description, and color
+     *
+     * @param url The webhook url
+     * @param title The title of the embed
+     * @param description This is a list of strings that will be sent to the webhook.
+     * @param color The color of the embed.
+     */
     public void sendWebhook(String url, String title, List<String> description, String color) {
         DiscordWebhook hook = new DiscordWebhook(url);
         hook.setTts(false);

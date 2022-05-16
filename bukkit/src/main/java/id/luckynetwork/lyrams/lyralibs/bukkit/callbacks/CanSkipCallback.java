@@ -19,6 +19,15 @@ public class CanSkipCallback {
     @Nullable
     private final List<String> reason;
 
+    /**
+     * If the sender is a player, and the targets are all in the same world, and the targets are all within 50 blocks of
+     * the sender, then the sender can skip the confirmation
+     *
+     * @param action The action that is being executed.
+     * @param targetsCallback The callback that will be used to get the targets.
+     * @param sender The CommandSender who executed the command.
+     * @return A CanSkipCallback object.
+     */
     public static CanSkipCallback canSkip(String action, TargetsCallback targetsCallback, CommandSender sender) {
         if (targetsCallback.size() == 1) {
             Player target = targetsCallback.getTargets().stream().findFirst().orElse(null);

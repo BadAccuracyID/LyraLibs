@@ -9,10 +9,22 @@ import org.apache.commons.lang3.StringUtils;
 @UtilityClass
 public class ChatUtils {
 
+    /**
+     * It replaces all ampersands in a string with dollar signs
+     *
+     * @param text The text to colorize
+     * @return The text with the & replaced with $
+     */
     public String colorize(String text) {
         return StringUtils.replace(text, "&", "§");
     }
 
+    /**
+     * It replaces all the color codes in a string with the color codes that are used by the Magic plugin
+     *
+     * @param text The text to be colorized
+     * @return The text with the color codes replaced with the magic codes.
+     */
     public String colorizeNonMagic(String text) {
         text = StringUtils.replace(text, "&0", "§0");
         text = StringUtils.replace(text, "&1", "§1");
@@ -35,6 +47,12 @@ public class ChatUtils {
         return text;
     }
 
+    /**
+     * It removes all the color codes from a string
+     *
+     * @param text The text to be decolorized.
+     * @return The text without the color codes.
+     */
     public String decolorize(String text) {
         text = StringUtils.remove(text, "§0");
         text = StringUtils.remove(text, "§1");
@@ -61,10 +79,12 @@ public class ChatUtils {
         return text;
     }
 
+    // Sending a message to a player.
     public void sendMessage(Player player, String message) {
         player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
     }
 
+    // Sending a message to a player.
     public void sendMessage(CommandSource player, String message) {
         player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
     }

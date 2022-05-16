@@ -24,6 +24,9 @@ public class ConfigFile extends LYamlConfiguration {
         this.load(file);
     }
 
+    /**
+     * This function saves the file.
+     */
     public void save() {
         try {
             this.save(this.file);

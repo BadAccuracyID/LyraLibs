@@ -16,6 +16,13 @@ public class ExecutorUtils {
     @Getter
     private final int poolSize = Runtime.getRuntime().availableProcessors() + 2;
 
+    /**
+     * > It creates a fixed size thread pool with a custom thread factory that sets the thread name and a custom uncaught
+     * exception handler that logs the exception
+     *
+     * @param name The name of the thread pool.
+     * @return A fixed thread pool executor service.
+     */
     public ExecutorService getFixedExecutorService(String name) {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(poolSize, poolSize,
@@ -27,6 +34,13 @@ public class ExecutorUtils {
         return executor;
     }
 
+    /**
+     * Create a thread pool executor with an unlimited number of threads, and a thread factory that creates threads with
+     * the given name.
+     *
+     * @param name The name of the thread pool.
+     * @return An ExecutorService
+     */
     public ExecutorService getUnlimitedExecutorService(String name) {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
@@ -38,6 +52,13 @@ public class ExecutorUtils {
         return executor;
     }
 
+    /**
+     * Create a single threaded executor with a thread factory that creates threads with the given name and a custom
+     * uncaught exception handler.
+     *
+     * @param name The name of the thread pool.
+     * @return A single threaded executor service.
+     */
     public ExecutorService getSingleThreadedExecutor(String name) {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(0, 1,
@@ -49,6 +70,12 @@ public class ExecutorUtils {
         return executor;
     }
 
+    /**
+     * It creates a ForkJoinPool with a custom thread factory that renames the threads
+     *
+     * @param name The name of the thread pool.
+     * @return A work stealing executor service.
+     */
     public ExecutorService getWorkStealingExecutor(String name) {
         LuckyForkJoinWorkerThreadFactory factory = new LuckyForkJoinWorkerThreadFactory();
         ForkJoinPool pool = new ForkJoinPool(poolSize, factory, null, true);
@@ -63,7 +90,7 @@ public class ExecutorUtils {
     /**
      * The custom ForkJoinWorker thread factory
      */
-    static class LuckyForkJoinWorkerThreadFactory implements ForkJoinPool.ForkJoinWorkerThreadFactory {
+    private static class LuckyForkJoinWorkerThreadFactory implements ForkJoinPool.ForkJoinWorkerThreadFactory {
 
         @Setter
         private LuckyForkJoinWorkerThread workerThread = null;
@@ -104,7 +131,7 @@ public class ExecutorUtils {
     /**
      * The custom thread factory
      */
-    static class LuckyThreadFactory implements ThreadFactory {
+    private static class LuckyThreadFactory implements ThreadFactory {
         private static final AtomicInteger poolNumber = new AtomicInteger(1);
         private final ThreadGroup group;
         private final AtomicInteger threadNumber = new AtomicInteger(1);

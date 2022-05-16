@@ -32,6 +32,9 @@ public class DiscordWebhook {
         this.url = url;
     }
 
+    /**
+     * It takes the data you've set and sends it to the webhook URL
+     */
     public void execute() throws Exception {
         if (this.content == null && this.embeds.isEmpty()) {
             throw new IllegalArgumentException("Set content or add at least one EmbedObject");
@@ -162,7 +165,7 @@ public class DiscordWebhook {
                 } else if (val instanceof Boolean) {
                     builder.append(val);
                 } else if (val instanceof JSONObject) {
-                    builder.append(val.toString());
+                    builder.append(val);
                 } else if (val.getClass().isArray()) {
                     builder.append("[");
                     int len = Array.getLength(val);

@@ -13,6 +13,9 @@ public class Query {
     private final String sqlQuery;
     private final MySQL mySQL;
 
+    /**
+     * Execute the SQL query and close the statement.
+     */
     public void execute() {
         Statement statement = null;
         try {
@@ -33,6 +36,11 @@ public class Query {
         }
     }
 
+    /**
+     * Get a connection, create a statement, execute the query, and return the results.
+     *
+     * @return A Results object.
+     */
     public Results getResults() throws SQLException {
         Connection connection = mySQL.getConnection();
         Statement statement = connection.createStatement();

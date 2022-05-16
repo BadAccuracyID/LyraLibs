@@ -49,6 +49,11 @@ public class MongoManager {
         }
     }
 
+    /**
+     * It loads a collection from the database and stores it in a hashmap
+     *
+     * @param key The name of the collection to load
+     */
     public void loadCollection(String key) {
         try {
             this.mongoCollections.put(key, this.mongoDatabase.getCollection(key));
@@ -57,6 +62,12 @@ public class MongoManager {
         }
     }
 
+    /**
+     * If the collection is not loaded, load it
+     *
+     * @param key The name of the collection you want to get
+     * @return A MongoCollection object
+     */
     public MongoCollection<Document> getCollection(String key) {
         MongoCollection<Document> collection = this.mongoCollections.get(key);
         if (collection == null) {

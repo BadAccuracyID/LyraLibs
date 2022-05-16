@@ -24,6 +24,13 @@ public class LyraLibsBukkit {
         this.plugin = plugin;
     }
 
+    /**
+     * It creates a new instance of LyraLibsBukkit, sets the message prefix, and sets the instance variable to the new
+     * instance
+     *
+     * @param plugin The Plugin instance
+     * @param messagePrefix The prefix for all messages sent by the plugin.
+     */
     public static void initialize(Plugin plugin, String messagePrefix) {
         LyraLibsBukkit libs = new LyraLibsBukkit(plugin);
         libs.messagePrefix = messagePrefix;
@@ -32,26 +39,52 @@ public class LyraLibsBukkit {
         instance = libs;
     }
 
+    /**
+     * Initialize the menu manager.
+     */
     public static void initializeMenu() {
         instance.menuManager = new MenuManager();
     }
 
+    /**
+     * This function returns the plugin instance.
+     *
+     * @return The plugin instance.
+     */
     public static Plugin getPlugin() {
         return instance.plugin;
     }
 
+    /**
+     * This function returns the value of the messagePrefix variable.
+     *
+     * @return The message prefix.
+     */
     public static String getMessagePrefix() {
         return instance.messagePrefix;
     }
 
+    /**
+     * This function returns the menu manager.
+     *
+     * @return The menuManager object.
+     */
     public static MenuManager getMenuManager() {
         return instance.menuManager;
     }
 
+    /**
+     * If the instance is null, create a new instance of the class and return the versionSupport variable.
+     *
+     * @return The versionSupport field of the instance of the class.
+     */
     public static VersionSupport getVersionSupport() {
         return instance.versionSupport;
     }
 
+    /**
+     * It loads the version support class based on the server version
+     */
     private void loadVersionSupport() {
         String version = NMSUtils.getNmsVersion();
         plugin.getLogger().info("Loading support for " + version);

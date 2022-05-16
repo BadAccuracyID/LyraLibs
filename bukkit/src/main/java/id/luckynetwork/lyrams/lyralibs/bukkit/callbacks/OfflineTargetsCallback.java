@@ -20,26 +20,56 @@ public class OfflineTargetsCallback {
     private boolean notified = false;
     private Set<OfflinePlayer> targets = new HashSet<>();
 
+    /**
+     * It adds a player to the list of targets
+     *
+     * @param player The player to add to the list of targets.
+     */
     public void add(OfflinePlayer player) {
         this.targets.add(player);
     }
 
+    /**
+     * It adds all the players in the collection to the targets list
+     *
+     * @param player The player to add to the list of targets.
+     */
     public void addAll(Collection<? extends OfflinePlayer> player) {
         this.targets.addAll(player);
     }
 
+    /**
+     * Returns the number of targets in the list.
+     *
+     * @return The size of the targets arraylist.
+     */
     public int size() {
         return this.targets.size();
     }
 
+    /**
+     * Returns true if the list of targets is empty.
+     *
+     * @return The method isEmpty() returns a boolean value.
+     */
     public boolean isEmpty() {
         return this.targets.isEmpty();
     }
 
+    /**
+     * This function returns a stream of all the targets of this event.
+     *
+     * @return A stream of the targets
+     */
     public Stream<OfflinePlayer> stream() {
         return StreamSupport.stream(Spliterators.spliterator(targets, 0), false);
     }
 
+    /**
+     * For each player in the targets list, execute the action.
+     *
+     * @param action The action to be performed for each element
+     */
     public void forEach(Consumer<? super OfflinePlayer> action) {
         for (OfflinePlayer target : targets) {
             action.accept(target);

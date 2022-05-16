@@ -8,6 +8,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * It's a class that represents an embed object
+ */
 @Getter
 @Setter
 public class EmbedObject {

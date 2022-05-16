@@ -121,7 +121,23 @@ public abstract class LyraCommand extends Command {
         return this.getTabSuggestions(sender, alias, args);
     }
 
+    /**
+     * Send the default message to the given CommandSender.
+     *
+     * @param sender The CommandSender that sent the command.
+     */
     public abstract void sendDefaultMessage(CommandSender sender);
 
+    /**
+     * "Returns a list of tab suggestions for the specified command arguments."
+     *
+     * The first parameter is the CommandSender that is requesting the tab suggestions. This is the player that is typing
+     * the command
+     *
+     * @param sender The CommandSender who is executing the command.
+     * @param alias The alias that was used to call the command.
+     * @param args The arguments that were passed to the command.
+     * @return A list of strings.
+     */
     public abstract List<String> getTabSuggestions(CommandSender sender, String alias, String[] args);
 }

@@ -13,10 +13,24 @@ import java.util.List;
 @UtilityClass
 public class PlayerUtils {
 
+    /**
+     * It sets a metadata value for a player
+     *
+     * @param player The player to apply the metadata to.
+     * @param metadataKey The key of the metadata.
+     * @param metadataValue The value of the metadata.
+     */
     public void applyMetadata(Player player, String metadataKey, Object metadataValue) {
         player.setMetadata(metadataKey, new FixedMetadataValue(LyraLibsBukkit.getPlugin(), metadataValue));
     }
 
+    /**
+     * If the player has the metadata, return the first value in the list of metadata values
+     *
+     * @param player The player to get the metadata from.
+     * @param metadataKey The key of the metadata to get.
+     * @return The first metadata value of the player with the given key.
+     */
     @Nullable
     public MetadataValue getMetadata(Player player, String metadataKey) {
         if (!player.hasMetadata(metadataKey)) {

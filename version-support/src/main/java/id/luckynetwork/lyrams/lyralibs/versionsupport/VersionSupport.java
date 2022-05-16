@@ -25,9 +25,29 @@ public abstract class VersionSupport {
                 .build();
     }
 
+    /**
+     * Returns the PotionEffectType with the given name
+     *
+     * @param name The name of the potion effect.
+     * @return A PotionEffectType object.
+     */
     public abstract PotionEffectType getPotionEffectByName(String name);
 
+    /**
+     * It returns an ItemStack of the item with the given name, amount, and damage
+     *
+     * @param name The name of the item.
+     * @param amount The amount of the item you want to get.
+     * @param damage The damage value of the item.
+     * @return An ItemStack
+     */
     public abstract ItemStack getItemByName(String name, int amount, int damage);
 
+    /**
+     * Returns the Enchantment with the given name, or null if it doesn't exist
+     *
+     * @param name The name of the enchantment.
+     * @return The enchantment with the given name.
+     */
     public abstract Enchantment getEnchantmentByName(String name);
 }

@@ -21,6 +21,9 @@ public class MySQL {
     @Getter
     private Connection connection;
 
+    /**
+     * It connects to the database
+     */
     public void connect() throws SQLException {
         if (this.isConnected()) {
             return;
@@ -46,12 +49,20 @@ public class MySQL {
         this.connection = DriverManager.getConnection(url, config);
     }
 
+    /**
+     * If the connection is open, close it.
+     */
     public void disconnect() throws SQLException {
         if (this.isConnected()) {
             connection.close();
         }
     }
 
+    /**
+     * If the connection is not null, and it's not closed, and it's valid, then it's connected
+     *
+     * @return A boolean value.
+     */
     public boolean isConnected() {
         boolean connected = false;
 
@@ -64,10 +75,26 @@ public class MySQL {
         return connected;
     }
 
+    /**
+     * "Execute the given SQL query, and call the given callback function with the results."
+     *
+     * The first line of the function creates a new Query object, passing in the SQL query and the callback function. The
+     * second line calls the execute() function on the Query object
+     *
+     * @param sql The SQL query to execute.
+     */
     public void executeQuery(String sql) {
         new Query(sql, this).execute();
     }
 
+    /**
+     * "Execute the given SQL statement and return the results."
+     *
+     * The first thing we do is create a new Query object. We pass in the SQL statement and the database connection
+     *
+     * @param sql The SQL query to execute.
+     * @return A new Query object is being returned.
+     */
     public Results results(String sql) throws SQLException {
         return new Query(sql, this).getResults();
     }

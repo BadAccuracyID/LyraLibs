@@ -137,7 +137,7 @@ public abstract class LyraParentCommand extends Command {
             if (this.hasSubCommand(args[0])) {
                 LyraSubCommand subCommand = this.getSubCommand(args[0]);
                 if (subCommand.hasPermission(sender)) {
-                    return subCommand.tabComplete(sender, alias, args);
+                    return subCommand.getTabSuggestions(sender, alias, args);
                 }
             }
         }
@@ -149,16 +149,40 @@ public abstract class LyraParentCommand extends Command {
         return this.subCommands.stream().anyMatch(it -> it.getName().equalsIgnoreCase(name));
     }
 
+    /**
+     * Send the default message to the given CommandSender.
+     *
+     * @param sender The CommandSender that sent the command.
+     */
     public abstract void sendDefaultMessage(CommandSender sender);
 
+    /**
+     * It adds a subcommand to the list of subcommands
+     *
+     * @param subCommand The name of the subcommand.
+     */
     public void addSubCommand(LyraSubCommand subCommand) {
         this.subCommands.add(subCommand);
     }
 
+    /**
+     * It removes a subcommand from the list of subcommands
+     *
+     * @param name The name of the command.
+     */
     public void removeSubCommand(String name) {
         this.subCommands.removeIf(it -> it.getName().equalsIgnoreCase(name));
     }
 
+    /**
+     * "Return the first subcommand whose name matches the given name, or null if no subcommand matches."
+     *
+     * The first line of the function is a return statement. This means that the function will return whatever is on the
+     * right side of the equals sign
+     *
+     * @param name The name of the command.
+     * @return A LyraSubCommand object
+     */
     public LyraSubCommand getSubCommand(String name) {
         return this.subCommands.stream()
                 .filter(it -> it.getName().equalsIgnoreCase(name))

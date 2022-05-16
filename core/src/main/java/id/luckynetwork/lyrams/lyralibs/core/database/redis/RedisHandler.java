@@ -23,8 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// Some of this code is from https://github.com/AndyReckt/Midnight
 public class RedisHandler {
-
 
     @Getter
     private JedisPool jedisPool, subscriberPool, publisherPool;
@@ -53,6 +53,12 @@ public class RedisHandler {
         this.redisConfiguration = redisConfiguration;
     }
 
+    /**
+     * We create three JedisPools, one for each of the Jedis instances we'll be using, and then we ping each of them to
+     * make sure they're working.
+     *
+     * @return A boolean value.
+     */
     public boolean connect() {
         try {
             this.jedisPool = this.subscriberPool = this.publisherPool =
@@ -97,6 +103,11 @@ public class RedisHandler {
         return true;
     }
 
+    /**
+     * If any of the three pools are not connected, or if the pubSub is not subscribed, then return false.
+     *
+     * @return A boolean value.
+     */
     public boolean isConnected() {
         boolean isConnected = true;
 
@@ -129,6 +140,11 @@ public class RedisHandler {
         return isConnected;
     }
 
+    /**
+     * It tries to reconnect to the redis server
+     *
+     * @return A CompletableFuture that will run the reconnection process.
+     */
     public CompletableFuture<Void> reconnect() {
         if (this.isReconnecting.get()) {
             throw new RuntimeException("Already reconnecting");
@@ -216,6 +232,11 @@ public class RedisHandler {
         }, executor);
     }
 
+    /**
+     * If the class has the RedisObject annotation, add it to the objectMap
+     *
+     * @param clazz The class that is being registered.
+     */
     public void registerObject(Class<?> clazz) {
         if (clazz.getAnnotation(RedisObject.class) != null) {
             String packetID = clazz.getAnnotation(RedisObject.class).packetID();
@@ -226,6 +247,12 @@ public class RedisHandler {
         }
     }
 
+    /**
+     * It loops through all the methods in the class, and if it finds a method with the RedisListener annotation, it checks
+     * if the method has one parameter, and if it does, it adds the method to the dataMap
+     *
+     * @param clazz The class that contains the method that will be called when a packet is received.
+     */
     public void registerListener(Object clazz) {
         for (Method method : clazz.getClass().getDeclaredMethods()) {
             if (method.getAnnotation(RedisListener.class) != null) {
@@ -241,10 +268,21 @@ public class RedisHandler {
         }
     }
 
+    /**
+     * This function sends an object to all connected clients
+     *
+     * @param object The object to send.
+     */
     public void broadcastObject(Object object) {
         this.sendObject(object, "none");
     }
 
+    /**
+     * It sends an object to a specific server
+     *
+     * @param object The object to send
+     * @param targetServer The server to send the object to.
+     */
     public void sendObject(Object object, @NotNull String targetServer) {
         redisExecutor.execute(() -> {
             RedisObject annotation = object.getClass().getAnnotation(RedisObject.class);
@@ -300,6 +338,9 @@ public class RedisHandler {
         });
     }
 
+    /**
+     * > Close the redis client
+     */
     public void close() {
         try {
             this.logger.log(Level.INFO, "Closing redis client");
@@ -320,6 +361,11 @@ public class RedisHandler {
         }
     }
 
+    /**
+     * It creates a new JedisPubSub object, which is a class that listens for messages on a channel, and when it receives a
+     * message, it checks if the message is for the current server, and if it is, it parses the data and invokes the method
+     * that was registered with the packetID
+     */
     private void setupPubSub() {
         this.pubSub = new JedisPubSub() {
             @SneakyThrows
@@ -369,6 +415,12 @@ public class RedisHandler {
         });
     }
 
+    /**
+     * If there are more than 3 executor services, shut down the first one and remove it from the list. Then, create a new
+     * executor service and add it to the list
+     *
+     * @return An ExecutorService
+     */
     private ExecutorService generateExecutorService() throws Exception {
         if (executorServices.size() > 3) {
             executorServices.get(0).shutdownNow();
