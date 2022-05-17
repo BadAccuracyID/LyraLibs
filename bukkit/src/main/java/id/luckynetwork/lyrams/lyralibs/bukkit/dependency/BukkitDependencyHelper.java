@@ -6,9 +6,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import id.luckynetwork.lyrams.lyralibs.core.dependency.DependencyHelper;
 import lombok.experimental.UtilityClass;
-import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,37 +40,53 @@ public class BukkitDependencyHelper {
     }
 
     /**
-     * It takes a JSON file and a list of dependencies to exclude, and returns a map of dependencies and their URLs
+     * It reads a JSON file from the classpath, parses it into a list of dependencies, and returns a map of dependency
+     * names to URLs
      *
-     * @param jsonFile The file that contains the JSON array of dependencies.
-     * @param exclude A list of dependencies to exclude from the map.
+     * @param classLoader The class loader to use to load the file.
+     * @param fileName    The name of the file that contains the JSON data.
+     * @param exclude     A list of dependencies to exclude from the map.
      * @return A map of dependencies.
      */
-    @Nullable
-    public Map<String, String> createDependencyMapFromJsonFile(File jsonFile, List<String> exclude) {
+    @SuppressWarnings("deprecation")
+    public Map<String, String> createDependencyMapFromJson(ClassLoader classLoader, String fileName, List<String> exclude) {
         Map<String, String> dependencyMap = new HashMap<>();
 
-        try (InputStream stream = new FileInputStream(jsonFile);
-             InputStreamReader reader = new InputStreamReader(stream)) {
-            JsonArray dependencies = JsonParser.parseReader(reader).getAsJsonArray();
-            if (dependencies.size() == 0) {
-                return null;
-            }
+        try (InputStream stream = classLoader.getResourceAsStream(fileName)) {
+            assert stream != null;
+            try (InputStreamReader reader = new InputStreamReader(stream)) {
+                JsonParser parser = new JsonParser();
+                JsonArray dependencies = parser.parse(reader).getAsJsonArray();
+                if (dependencies.size() == 0) {
+                    return dependencyMap;
+                }
 
-            for (JsonElement element : dependencies) {
-                JsonObject dependency = element.getAsJsonObject();
-                if (!exclude.contains(dependency.get("name").getAsString())) {
-                    dependencyMap.put(
-                            dependency.get("name").getAsString(),
-                            dependency.get("url").getAsString()
-                    );
+                for (JsonElement element : dependencies) {
+                    JsonObject dependency = element.getAsJsonObject();
+                    if (!exclude.contains(dependency.get("name").getAsString())) {
+                        dependencyMap.put(
+                                dependency.get("name").getAsString(),
+                                dependency.get("url").getAsString()
+                        );
+                    }
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return dependencyMap;
+    }
+
+    /**
+     * > This function takes a classloader and a filename and returns a map of dependencies
+     *
+     * @param classLoader The classloader to use to load the file.
+     * @param fileName    The name of the file that contains the JSON data.
+     * @return A map of dependencies.
+     */
+    public Map<String, String> createDependencyMapFromJson(ClassLoader classLoader, String fileName) {
+        return createDependencyMapFromJson(classLoader, fileName, new ArrayList<>());
     }
 
 
