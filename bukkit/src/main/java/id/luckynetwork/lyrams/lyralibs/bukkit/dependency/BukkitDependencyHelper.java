@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import id.luckynetwork.lyrams.lyralibs.bukkit.LyraLibsBukkit;
 import id.luckynetwork.lyrams.lyralibs.core.dependency.DependencyHelper;
 import lombok.experimental.UtilityClass;
 
@@ -15,9 +16,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 @UtilityClass
 public class BukkitDependencyHelper {
+
+    static {
+        String property = System.getProperty("java.version");
+        if (property.startsWith("1.")) {
+            property = property.substring(2, 3);
+        } else {
+            int dot = property.indexOf(".");
+            if (dot != -1) {
+                property = property.substring(0, dot);
+            }
+        }
+
+        LyraLibsBukkit.getPlugin().getLogger().log(Level.INFO, "Java version: " + property);
+
+        int version = Integer.parseInt(property);
+        if (version >= 11) {
+            LyraLibsBukkit.getPlugin().getLogger().log(Level.WARNING, "You are using Java version " + property + " which might not support " +
+                    "dependency injecting. If you encounter errors while injecting dependencies, please add " +
+                    "'--add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED' to your JVM arguments.");
+        }
+    }
 
     /**
      * Loads dependency from map
@@ -30,6 +53,7 @@ public class BukkitDependencyHelper {
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public void loadDependencies(ClassLoader classLoader, Map<String, String> dependencyMap, File librariesDirectory) throws IOException, IllegalAccessException {
+        LyraLibsBukkit.getPlugin().getLogger().log(Level.INFO, "Loading dependencies...");
         if (!librariesDirectory.exists()) {
             librariesDirectory.mkdirs();
         }
@@ -37,6 +61,8 @@ public class BukkitDependencyHelper {
         DependencyHelper helper = new DependencyHelper(classLoader);
         helper.download(dependencyMap, librariesDirectory.toPath());
         helper.loadDir(librariesDirectory.toPath());
+
+        LyraLibsBukkit.getPlugin().getLogger().log(Level.INFO, "Dependencies loaded!");
     }
 
     /**
@@ -50,6 +76,7 @@ public class BukkitDependencyHelper {
      */
     @SuppressWarnings("deprecation")
     public Map<String, String> createDependencyMapFromJson(ClassLoader classLoader, String fileName, List<String> exclude) {
+        LyraLibsBukkit.getPlugin().getLogger().log(Level.INFO, "Creating dependency map...");
         Map<String, String> dependencyMap = new HashMap<>();
 
         try (InputStream stream = classLoader.getResourceAsStream(fileName)) {
