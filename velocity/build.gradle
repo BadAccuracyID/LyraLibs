@@ -5,6 +5,10 @@ plugins {
 }
 
 configurations {
+    otherProjects
+}
+
+configurations {
     extraLibs
 }
 
@@ -12,7 +16,7 @@ def pluginName = 'LyraLibs-Velocity'
 def code = 0
 
 dependencies {
-    extraLibs project(":core")
+    otherProjects project(":core")
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'com.velocitypowered:velocity-api:3.0.1'
@@ -32,6 +36,7 @@ dependencies {
     compileOnly 'com.velocitypowered:velocity-api:3.0.1'
 
     configurations.compileOnly.extendsFrom(configurations.extraLibs)
+    configurations.compileOnly.extendsFrom(configurations.otherProjects)
 }
 
 task updateBuildNumber {
@@ -53,6 +58,20 @@ jar {
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    from {
+        configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task jarLight(type: Jar) {
+    from sourceSets.main.output
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "LyraLibs-Velocity-Light b" + code.toString() + ".jar"
+
+    from {
+        configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 processResources {
@@ -63,3 +82,5 @@ processResources {
             "number"   : code.toString()
     ]
 }
+
+assemble.dependsOn(jarLight)

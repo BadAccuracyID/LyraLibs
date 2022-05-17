@@ -1,5 +1,6 @@
 package id.luckynetwork.lyrams.lyralibs.bukkit;
 
+import id.luckynetwork.lyrams.lyralibs.bukkit.dependency.BukkitDependencyHelper;
 import id.luckynetwork.lyrams.lyralibs.bukkit.menus.MenuManager;
 import id.luckynetwork.lyrams.lyralibs.bukkit.utils.NMSUtils;
 import id.luckynetwork.lyrams.lyralibs.versionsupport.VersionSupport;
@@ -7,7 +8,11 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LyraLibsBukkit {
 
@@ -28,7 +33,7 @@ public class LyraLibsBukkit {
      * It creates a new instance of LyraLibsBukkit, sets the message prefix, and sets the instance variable to the new
      * instance
      *
-     * @param plugin The Plugin instance
+     * @param plugin        The Plugin instance
      * @param messagePrefix The prefix for all messages sent by the plugin.
      */
     public static void initialize(Plugin plugin, String messagePrefix) {
@@ -37,6 +42,27 @@ public class LyraLibsBukkit {
         libs.loadVersionSupport();
 
         instance = libs;
+    }
+
+    /**
+     * It downloads the dependencies from the dependencies.json file and loads them into the plugin's classpath
+     */
+    public static void downloadDependencies() {
+        Map<String, String> dependencies = new HashMap<>();
+        dependencies.put("mongo-java-driver-3.12.11.jar", "https://search.maven.org/remotecontent?filepath=org/mongodb/mongo-java-driver/3.12.11/mongo-java-driver-3.12.11.jar");
+        dependencies.put("jedis-3.7.0.jar", "https://search.maven.org/remotecontent?filepath=redis/clients/jedis/3.7.0/jedis-3.7.0.jar");
+        dependencies.put("gson-2.9.0.jar", "https://search.maven.org/remotecontent?filepath=com/google/code/gson/gson/2.9.0/gson-2.9.0.jar");
+
+        try {
+            File librariesDirectory = new File("plugins/" + LyraLibsBukkit.getPlugin().getDescription().getName() + "/libs");
+            if (!librariesDirectory.exists()) {
+                librariesDirectory.mkdirs();
+            }
+
+            BukkitDependencyHelper.loadDependencies(LyraLibsBukkit.getPlugin().getClass().getClassLoader(), dependencies, librariesDirectory);
+        } catch (IOException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -123,7 +149,8 @@ public class LyraLibsBukkit {
             }
 
             versionSupport = (VersionSupport) support.getConstructor(Class.forName("org.bukkit.plugin.Plugin")).newInstance(plugin);
-        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException e) {
             e.printStackTrace();
             plugin.getLogger().severe("Unsupported server version!");
             Bukkit.getPluginManager().disablePlugin(plugin);

@@ -5,6 +5,10 @@ plugins {
 }
 
 configurations {
+    otherProjects
+}
+
+configurations {
     extraLibs
 }
 
@@ -12,10 +16,10 @@ def pluginName = 'LyraLibs-Bukkit'
 def code = 0
 
 dependencies {
-    extraLibs project(":core")
-    extraLibs project(":version-support")
-    extraLibs project(":version-support1_8")
-    extraLibs project(":version-support1_13")
+    otherProjects project(":core")
+    otherProjects project(":version-support")
+    otherProjects project(":version-support1_8")
+    otherProjects project(":version-support1_13")
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
@@ -34,6 +38,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
 
     configurations.compileOnly.extendsFrom(configurations.extraLibs)
+    configurations.compileOnly.extendsFrom(configurations.otherProjects)
 }
 
 task updateBuildNumber {
@@ -49,11 +54,24 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
     archiveFileName = "LyraLibs-Bukkit b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from {
+        configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task jarLight(type: Jar) {
+    from sourceSets.main.output
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "LyraLibs-Bukkit-Light b" + code.toString() + ".jar"
+
+    from {
+        configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -65,3 +83,5 @@ processResources {
             "number"   : code.toString()
     ]
 }
+
+assemble.dependsOn(jarLight)

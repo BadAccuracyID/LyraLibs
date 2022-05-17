@@ -10,11 +10,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
     //mongodb
-    extraLibs 'org.mongodb:mongo-java-driver:3.12.10'
+    compileOnly 'org.mongodb:mongo-java-driver:3.12.10'
     // jedis
-    extraLibs 'redis.clients:jedis:3.7.0'
+    compileOnly 'redis.clients:jedis:3.7.0'
     // gson
-    extraLibs 'com.google.code.gson:gson:2.8.6'
+    compileOnly 'com.google.code.gson:gson:2.8.6'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.20'
