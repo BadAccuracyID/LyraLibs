@@ -1,4 +1,4 @@
-gradle
-.gradle
+*.lock
+*.bin
 */build
 .idea
