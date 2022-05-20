@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 // Credit to https://github.com/AndyReckt/Midnight
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 public @interface RedisListener {
 
 }
