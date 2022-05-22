@@ -186,8 +186,6 @@ public class LyraLibsBukkit {
         RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
         List<String> jvmArgs = runtimeMXBean.getInputArguments();
 
-        System.out.println(jvmArgs.toString());
-
         return jvmArgs.stream().anyMatch(it -> it.contains("NovenaInjector.jar"));
     }
 
