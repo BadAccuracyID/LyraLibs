@@ -16,10 +16,13 @@ import java.util.Map;
  */
 public class DependencyHelper {
 
-    private final ClassLoader classLoader;
+    private ClassLoader classLoader = null;
 
     public DependencyHelper(ClassLoader classLoader) {
         this.classLoader = classLoader;
+    }
+
+    public DependencyHelper() {
     }
 
     /**
@@ -60,6 +63,9 @@ public class DependencyHelper {
      * @throws IllegalAccessException if the dependency file isn't a .jar
      */
     public void load(File file) throws IOException, IllegalAccessException {
+        if (classLoader == null) {
+            throw new RuntimeException("classLoader is null!");
+        }
         if (!file.exists()) {
             throw new FileNotFoundException("Cannot load file " + file.getName() + "!");
         }

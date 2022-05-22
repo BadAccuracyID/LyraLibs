@@ -1,8 +1,10 @@
 package id.luckynetwork.lyrams.lyralibs.bukkit;
 
+import id.luckynetwork.dev.novenag.injectoragent.NovenaInjector;
 import id.luckynetwork.lyrams.lyralibs.bukkit.dependency.BukkitDependencyHelper;
 import id.luckynetwork.lyrams.lyralibs.bukkit.menus.MenuManager;
 import id.luckynetwork.lyrams.lyralibs.bukkit.utils.NMSUtils;
+import id.luckynetwork.lyrams.lyralibs.core.dependency.DependencyHelper;
 import id.luckynetwork.lyrams.lyralibs.versionsupport.VersionSupport;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -10,9 +12,15 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.jar.JarFile;
 
 public class LyraLibsBukkit {
 
@@ -59,7 +67,23 @@ public class LyraLibsBukkit {
                 librariesDirectory.mkdirs();
             }
 
-            BukkitDependencyHelper.loadDependencies(LyraLibsBukkit.getPlugin().getClass().getClassLoader(), dependencies, librariesDirectory);
+            if (hasNovenaInjector()) {
+                DependencyHelper helper = new DependencyHelper();
+                helper.download(dependencies, librariesDirectory.toPath());
+
+                Arrays.stream(Objects.requireNonNull(librariesDirectory.listFiles()))
+                        .filter(it -> it.getName().endsWith(".jar"))
+                        .map(it -> {
+                            try {
+                                return new JarFile(it);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        })
+                        .forEach(NovenaInjector::appendJarFile);
+            } else {
+                BukkitDependencyHelper.loadDependencies(LyraLibsBukkit.getPlugin().getClass().getClassLoader(), dependencies, librariesDirectory);
+            }
         } catch (IOException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -156,6 +180,15 @@ public class LyraLibsBukkit {
             plugin.getLogger().severe("Unsupported server version!");
             Bukkit.getPluginManager().disablePlugin(plugin);
         }
+    }
+
+    private static boolean hasNovenaInjector() {
+        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        List<String> jvmArgs = runtimeMXBean.getInputArguments();
+
+        System.out.println(jvmArgs.toString());
+
+        return jvmArgs.stream().anyMatch(it -> it.contains("NovenaInjector.jar"));
     }
 
 }
