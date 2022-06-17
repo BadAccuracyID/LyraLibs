@@ -155,15 +155,20 @@ public class LyraLibsBukkit {
                     plugin.getLogger().info("Loaded version support v1_12_R1");
                     break;
                 }
-                case "v1_13_R1":
+                case "v1_13_R1": {
+                    support = Class.forName("id.luckynetwork.lyrams.lyralibs.versionsupport.v1_13_R1.v1_13_R1");
+                    plugin.getLogger().info("Loaded version support v1_13_R1");
+                    break;
+                }
                 case "v1_14_R1":
                 case "v1_15_R1":
                 case "v1_16_R1":
                 case "v1_17_R1":
                 case "v1_18_R1":
-                case "v1_18_R2": {
-                    support = Class.forName("id.luckynetwork.lyrams.lyralibs.versionsupport.v1_13_R1.v1_13_R1");
-                    plugin.getLogger().info("Loaded version support v1_13_R1");
+                case "v1_18_R2":
+                case "v1_19_R1": {
+                    support = Class.forName("id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R1.v1_16_R1");
+                    plugin.getLogger().info("Loaded version support v1_16_R1");
                     break;
                 }
                 default: {

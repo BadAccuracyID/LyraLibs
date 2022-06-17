@@ -59,3 +59,5 @@ version '1.0.0'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+// gradlew clean core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build

@@ -1,4 +1,4 @@
-package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_13_R1.enums;
+package id.luckynetwork.lyrams.lyralibs.versionsupport.enums;
 
 import lombok.Getter;
 import org.bukkit.Material;
@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 
 @SuppressWarnings({"unused", "SpellCheckingInspection"})
 public enum LItemStack {
-
     COBBLE(new ItemStack(Material.COBBLESTONE, 1)),
     STONEBRICK(new ItemStack(Material.STONE_BRICKS, 1)),
     GRANITE(new ItemStack(Material.STONE, 1)),
@@ -485,7 +484,6 @@ public enum LItemStack {
     BREWINGSTAND(new ItemStack(Material.BREWING_STAND, 1)),
     BREWING(new ItemStack(Material.BREWING_STAND, 1)),
     BREW(new ItemStack(Material.BREWING_STAND, 1)),
-    PACKEDICE(new ItemStack(Material.PACKED_ICE, 1)),
 
     IRONHORSEARMOR(new ItemStack(Material.IRON_HORSE_ARMOR, 1)),
     GOLDENHORSEARMOR(new ItemStack(Material.GOLDEN_HORSE_ARMOR, 1)),
@@ -677,6 +675,132 @@ public enum LItemStack {
     SMOOTHSTONE(new ItemStack(Material.SMOOTH_STONE, 1)),
 
     TURTLESHELL(new ItemStack(Material.TURTLE_HELMET, 1)),
+
+
+    //1.14 things
+    BLASTFURNACE(new ItemStack(Material.BLAST_FURNACE, 1)),
+    CARTOGRAPHYTABLE(new ItemStack(Material.CARTOGRAPHY_TABLE, 1)),
+    CARTOGRAPHY(new ItemStack(Material.CARTOGRAPHY_TABLE, 1)),
+    FLETCHINGTABLE(new ItemStack(Material.FLETCHING_TABLE, 1)),
+    FLETCHING(new ItemStack(Material.FLETCHING_TABLE, 1)),
+    SCAFFOLD(new ItemStack(Material.SCAFFOLDING, 1)),
+    SMITHINGTABLE(new ItemStack(Material.SMITHING_TABLE, 1)),
+    SMITHING(new ItemStack(Material.SMITHING_TABLE, 1)),
+    BUSHES(new ItemStack(Material.SWEET_BERRY_BUSH, 1)),
+    BUSH(new ItemStack(Material.SWEET_BERRY_BUSH, 1)),
+
+    STONESTAIR(new ItemStack(Material.STONE_STAIRS, 1)),
+    ANDESITESTAIR(new ItemStack(Material.ANDESITE_STAIRS, 1)),
+    DIORITESTAIR(new ItemStack(Material.DIORITE_STAIRS, 1)),
+    GRANITESTAIR(new ItemStack(Material.GRANITE_STAIRS, 1)),
+    POLISHEDANDESITESTAIR(new ItemStack(Material.POLISHED_ANDESITE_STAIRS, 1)),
+    POLISHEDDIORITESTAIR(new ItemStack(Material.POLISHED_DIORITE_STAIRS, 1)),
+    POLISHEDGRANITESTAIR(new ItemStack(Material.POLISHED_GRANITE_STAIRS, 1)),
+    MOSSYSTONEBRICKSTAIRS(new ItemStack(Material.MOSSY_STONE_BRICK_STAIRS, 1)),
+    MOSSYCOBBLESTONESTAIRS(new ItemStack(Material.MOSSY_COBBLESTONE_STAIRS, 1)),
+    SMOOTHSTONESTAIRS(new ItemStack(Material.SMOOTH_SANDSTONE_STAIRS, 1)),
+    SMOOTHREDSANDSTONESTAIRS(new ItemStack(Material.SMOOTH_RED_SANDSTONE_STAIRS, 1)),
+    SMOOTHQUARTZSTAIRS(new ItemStack(Material.SMOOTH_QUARTZ_STAIRS, 1)),
+    REDNETHERBRICKSTAIRS(new ItemStack(Material.RED_NETHER_BRICK_STAIRS, 1)),
+    ENDSTONESTAIRS(new ItemStack(Material.END_STONE_BRICK_STAIRS, 1)),
+
+    BRICKWALL(new ItemStack(Material.BRICK_WALL, 1)),
+    ANDESITEWALL(new ItemStack(Material.ANDESITE_WALL, 1)),
+    DIORITEWALL(new ItemStack(Material.DIORITE_WALL, 1)),
+    GRANITEWALL(new ItemStack(Material.GRANITE_WALL, 1)),
+    PRISMARINEWALL(new ItemStack(Material.PRISMARINE_WALL, 1)),
+    STONEBRICKWALL(new ItemStack(Material.STONE_BRICK_WALL, 1)),
+    MOSSYSTONEBRICKWALL(new ItemStack(Material.MOSSY_STONE_BRICK_WALL, 1)),
+    SANDSTONEWALL(new ItemStack(Material.SANDSTONE_WALL, 1)),
+    REDSANDSTONEWALL(new ItemStack(Material.RED_SANDSTONE_WALL, 1)),
+    NETHERBRICKWALL(new ItemStack(Material.NETHER_BRICK_WALL, 1)),
+    REDNETHERBRICKWALL(new ItemStack(Material.RED_NETHER_BRICK_WALL, 1)),
+    ENDSTONEBRICKWALL(new ItemStack(Material.END_STONE_BRICK_WALL, 1)),
+
+    LEATHERHORSEARMOR(new ItemStack(Material.LEATHER_HORSE_ARMOR, 1)),
+    SUSPICIOUSSTEW(new ItemStack(Material.SUSPICIOUS_STEW, 1)),
+    SWEETBERRIES(new ItemStack(Material.SWEET_BERRIES, 1)),
+    BERRIES(new ItemStack(Material.SWEET_BERRIES, 1)),
+
+
+    // 1.15
+    BEENEST(new ItemStack(Material.BEE_NEST, 1)),
+    HIVE(new ItemStack(Material.BEEHIVE, 1)),
+    HONEYBLOCK(new ItemStack(Material.HONEY_BLOCK, 1)),
+    HONEYCOMBBLOCK(new ItemStack(Material.HONEYCOMB_BLOCK, 1)),
+    HONEYBOTTLE(new ItemStack(Material.HONEY_BOTTLE, 1)),
+
+
+    // 1.16
+    ANCIENTDEBRIS(new ItemStack(Material.ANCIENT_DEBRIS, 1)),
+    DEBRIS(new ItemStack(Material.ANCIENT_DEBRIS, 1)),
+    NETHERITEBLOCK(new ItemStack(Material.NETHERITE_BLOCK, 1)),
+    NETHERITE(new ItemStack(Material.NETHERITE_INGOT, 1)),
+    NETHERITESCRAP(new ItemStack(Material.NETHERITE_SCRAP, 1)),
+
+    CHISLEDNETHERBRICK(new ItemStack(Material.CHISELED_NETHER_BRICKS, 1)),
+    CRACKEDNETHERBRICK(new ItemStack(Material.CRACKED_NETHER_BRICKS, 1)),
+
+    CRIMSONFUNGI(new ItemStack(Material.CRIMSON_FUNGUS, 1)),
+    WARPEDFUNGI(new ItemStack(Material.WARPED_FUNGUS, 1)),
+
+    CRIMSONNYLIUM(new ItemStack(Material.CRIMSON_NYLIUM, 1)),
+    WARPEDNYLIUM(new ItemStack(Material.WARPED_NYLIUM, 1)),
+
+    CRIMSONPLANKS(new ItemStack(Material.CRIMSON_PLANKS, 1)),
+    WARPEDPLANKS(new ItemStack(Material.WARPED_PLANKS, 1)),
+
+    CRIMSONROOTS(new ItemStack(Material.CRIMSON_ROOTS, 1)),
+    WARPEDROOTS(new ItemStack(Material.WARPED_ROOTS, 1)),
+
+    CRIMSONSTEM(new ItemStack(Material.CRIMSON_STEM, 1)),
+    WARPEDSTEM(new ItemStack(Material.WARPED_STEM, 1)),
+
+    STRIPPEDCRIMSONSTEM(new ItemStack(Material.STRIPPED_CRIMSON_STEM, 1)),
+    STRIPPEDWARPEDSTEM(new ItemStack(Material.STRIPPED_WARPED_STEM, 1)),
+
+    CRIMSONHYPHAE(new ItemStack(Material.CRIMSON_HYPHAE, 1)),
+    WARPEDHYPHAE(new ItemStack(Material.WARPED_HYPHAE, 1)),
+
+    STRIPPEDCRIMSONHYPHAE(new ItemStack(Material.STRIPPED_CRIMSON_HYPHAE, 1)),
+    STRIPPEDWARPEDHYPHAE(new ItemStack(Material.STRIPPED_WARPED_HYPHAE, 1)),
+
+    CRYINGOBSIDIAN(new ItemStack(Material.CRYING_OBSIDIAN, 1)),
+    CRYINGOBBY(new ItemStack(Material.CRYING_OBSIDIAN, 1)),
+
+    GILDEDBLACKSTONE(new ItemStack(Material.GILDED_BLACKSTONE, 1)),
+    LODE(new ItemStack(Material.LODESTONE, 1)),
+
+    NETHERGOLDORE(new ItemStack(Material.NETHER_GOLD_ORE, 1)),
+    NETHERSPROUT(new ItemStack(Material.NETHER_SPROUTS, 1)),
+
+    QUARTZBRICKS(new ItemStack(Material.QUARTZ_BRICKS, 1)),
+
+    RESPAWNANCHOR(new ItemStack(Material.RESPAWN_ANCHOR, 1)),
+
+    SOULCAMPFIRE(new ItemStack(Material.SOUL_CAMPFIRE, 1)),
+    SOULLANTERN(new ItemStack(Material.SOUL_LANTERN, 1)),
+    SOULTORCH(new ItemStack(Material.SOUL_TORCH, 1)),
+
+    TWISTINGVINE(new ItemStack(Material.TWISTING_VINES, 1)),
+    WARPEDWARTBLOCK(new ItemStack(Material.WARPED_WART_BLOCK, 1)),
+    WEEPINGVINE(new ItemStack(Material.WEEPING_VINES, 1)),
+
+    NETHERITEHELMET(new ItemStack(Material.NETHERITE_HELMET, 1)),
+    NETHERITECHESTPLATE(new ItemStack(Material.NETHERITE_CHESTPLATE, 1)),
+    NETHERITEPANTS(new ItemStack(Material.NETHERITE_LEGGINGS, 1)),
+    NETHERITELEGGINGS(new ItemStack(Material.NETHERITE_LEGGINGS, 1)),
+    NETHERITEBOOTS(new ItemStack(Material.NETHERITE_BOOTS, 1)),
+
+    NETHERITEAXE(new ItemStack(Material.NETHERITE_AXE, 1)),
+    NETHERITEPICKAXE(new ItemStack(Material.NETHERITE_PICKAXE, 1)),
+    NETHERITESWORD(new ItemStack(Material.NETHERITE_SWORD, 1)),
+    NETHERITESPADE(new ItemStack(Material.NETHERITE_SHOVEL, 1)),
+    NETHERITESHOVEL(new ItemStack(Material.NETHERITE_SHOVEL, 1)),
+    NETHERITEHOE(new ItemStack(Material.NETHERITE_HOE, 1)),
+
+    WARPEDFUNGUSONASTICK(new ItemStack(Material.WARPED_FUNGUS_ON_A_STICK, 1)),
+
     ;
 
     @Getter

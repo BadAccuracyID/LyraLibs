@@ -1,4 +1,4 @@
-package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_13_R1.enums;
+package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_12_R1.enums;
 
 import lombok.Getter;
 import org.bukkit.potion.PotionEffectType;
@@ -6,16 +6,11 @@ import org.bukkit.potion.PotionEffectType;
 public enum LEffects {
 
     ABS(PotionEffectType.ABSORPTION),
-    DOLPHINS(PotionEffectType.DOLPHINS_GRACE),
-    DOLPHIN(PotionEffectType.DOLPHINS_GRACE),
-    DOLPHINSGRACE(PotionEffectType.DOLPHINS_GRACE),
-    DOLPHINGRACE(PotionEffectType.DOLPHINS_GRACE),
     GLOW(PotionEffectType.GLOWING),
     FLOAT(PotionEffectType.LEVITATION),
     FLY(PotionEffectType.LEVITATION),
     LUCKY(PotionEffectType.LUCK),
     UNLUCKY(PotionEffectType.UNLUCK),
-    BADLUCK(PotionEffectType.UNLUCK),
     BLIND(PotionEffectType.BLINDNESS),
     NAUSEA(PotionEffectType.CONFUSION),
     RESISTANCE(PotionEffectType.DAMAGE_RESISTANCE),
@@ -39,8 +34,6 @@ public enum LEffects {
     NIGHTVISION(PotionEffectType.NIGHT_VISION),
     NIGHT(PotionEffectType.NIGHT_VISION),
     SLOWNESS(PotionEffectType.SLOW),
-    SLOWFALL(PotionEffectType.SLOW_FALLING),
-    SLOWFALLING(PotionEffectType.SLOW_FALLING),
     MININGFATIGUE(PotionEffectType.SLOW_DIGGING),
     MINERFATIGUE(PotionEffectType.SLOW_DIGGING),
     FATIGUE(PotionEffectType.SLOW_DIGGING),

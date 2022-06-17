@@ -1,4 +1,4 @@
-package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_13_R1.enums;
+package id.luckynetwork.lyrams.lyralibs.versionsupport.enums;
 
 import lombok.Getter;
 import org.bukkit.potion.PotionEffectType;

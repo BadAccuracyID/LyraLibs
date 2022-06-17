@@ -1,0 +1,32 @@
+plugins {
+    id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
+}
+
+configurations {
+    extraLibs
+}
+
+dependencies {
+    implementation project(":version-support")
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    // jetbrains annotations
+    compileOnly 'org.jetbrains:annotations:20.1.0'
+    // spigot 1.12
+    compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+
+    configurations.compileOnly.extendsFrom(configurations.extraLibs)
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    archiveFileName = "LyraLibs-VS1_12.jar"
+
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
