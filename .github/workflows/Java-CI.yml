@@ -21,12 +21,13 @@ jobs:
           java -jar BuildTools.jar --rev 1.8.8
           java -jar BuildTools.jar --rev 1.12.2
           java -jar BuildTools.jar --rev 1.13.2
+          java -jar BuildTools.jar --rev 1.16.4
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Clean artifacts with Gradle
         run: ./gradlew clean
       - name: Build with Gradle
-        run: ./gradlew core:build version-support:build version-support1_8:build version-support1_13:build build
+        run: ./gradlew core:build version-support:build version-support1_8:build version-support1_13:build version-support1_16:build build
       - uses: actions/upload-artifact@v2
         with:
           name: LyraLibs
