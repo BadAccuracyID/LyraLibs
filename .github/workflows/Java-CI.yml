@@ -21,7 +21,7 @@ jobs:
           java -jar BuildTools.jar --rev 1.8.8
           java -jar BuildTools.jar --rev 1.12.2
           java -jar BuildTools.jar --rev 1.13.2
-          java -jar BuildTools.jar --rev 1.16.4
+          java -jar BuildTools.jar --rev 1.16.5
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Clean artifacts with Gradle
