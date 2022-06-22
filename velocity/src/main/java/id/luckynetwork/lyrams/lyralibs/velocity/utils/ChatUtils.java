@@ -9,13 +9,44 @@ import org.apache.commons.lang3.StringUtils;
 @UtilityClass
 public class ChatUtils {
 
+    private final LegacyComponentSerializer legacyComponentSerializer = LegacyComponentSerializer.builder().build();
+
+    /**
+     * It replaces all the color codes in the string with the color codes that the plugin uses
+     *
+     * @param text The text to be colorized.
+     * @return The text with the color codes replaced with the color codes that the plugin uses.
+     */
+    public String colorize(String text) {
+        text = StringUtils.replace(text, "&0", "§0");
+        text = StringUtils.replace(text, "&1", "§1");
+        text = StringUtils.replace(text, "&2", "§2");
+        text = StringUtils.replace(text, "&3", "§3");
+        text = StringUtils.replace(text, "&4", "§4");
+        text = StringUtils.replace(text, "&5", "§5");
+        text = StringUtils.replace(text, "&6", "§6");
+        text = StringUtils.replace(text, "&7", "§7");
+        text = StringUtils.replace(text, "&8", "§8");
+        text = StringUtils.replace(text, "&9", "§9");
+        text = StringUtils.replace(text, "&a", "§a");
+        text = StringUtils.replace(text, "&b", "§b");
+        text = StringUtils.replace(text, "&c", "§c");
+        text = StringUtils.replace(text, "&d", "§d");
+        text = StringUtils.replace(text, "&e", "§e");
+        text = StringUtils.replace(text, "&f", "§f");
+        text = StringUtils.replace(text, "&k", "§k");
+        text = StringUtils.replace(text, "&l", "§l");
+
+        return text;
+    }
+
     /**
      * It replaces all ampersands in a string with dollar signs
      *
      * @param text The text to colorize
      * @return The text with the & replaced with $
      */
-    public String colorize(String text) {
+    public String colorizeFast(String text) {
         return StringUtils.replace(text, "&", "§");
     }
 
@@ -80,13 +111,23 @@ public class ChatUtils {
     }
 
     // Sending a message to a player.
-    public void sendMessage(Player player, String message) {
+    public void sendColoredMessage(Player player, String message) {
         player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
     }
 
     // Sending a message to a player.
-    public void sendMessage(CommandSource player, String message) {
+    public void sendMessage(Player player, String message) {
+        player.sendMessage(legacyComponentSerializer.deserialize(message));
+    }
+
+    // Sending a message to a commandSource.
+    public void sendColoredMessage(CommandSource player, String message) {
         player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
+    }
+
+    // Sending a message to a commandSource.
+    public void sendMessage(CommandSource player, String message) {
+        player.sendMessage(legacyComponentSerializer.deserialize(message));
     }
 
 }
