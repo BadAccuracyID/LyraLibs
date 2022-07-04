@@ -7,7 +7,16 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinWorkerThread;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @UtilityClass
@@ -35,6 +44,21 @@ public class ExecutorUtils {
     }
 
     /**
+     * > It creates a new `ScheduledExecutorService` with a fixed pool size, and a `ThreadFactory` that creates threads
+     * with a name format of `name` and a `LuckyThreadFactory` that creates threads with a name format of `name`
+     *
+     * @param name The name of the thread pool.
+     * @return A ScheduledExecutorService
+     */
+    public ScheduledExecutorService getFixedScheduledExecutorService(String name) {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(poolSize, factory);
+
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
+    }
+
+    /**
      * Create a thread pool executor with an unlimited number of threads, and a thread factory that creates threads with
      * the given name.
      *
@@ -53,6 +77,20 @@ public class ExecutorUtils {
     }
 
     /**
+     * Create a scheduled executor service with an unlimited number of threads, and allow the threads to time out.
+     *
+     * @param name The name of the thread pool.
+     * @return A ScheduledExecutorService
+     */
+    public ScheduledExecutorService getUnlimitedScheduledExecutorService(String name) {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(Integer.MAX_VALUE, factory);
+
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
+    }
+
+    /**
      * Create a single threaded executor with a thread factory that creates threads with the given name and a custom
      * uncaught exception handler.
      *
@@ -65,6 +103,21 @@ public class ExecutorUtils {
                 15L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(),
                 factory);
+
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
+    }
+
+    /**
+     * Create a single threaded scheduled executor with a custom thread factory that sets the thread name and uses
+     * LuckyThreadFactory to set the thread priority.
+     *
+     * @param name The name of the thread.
+     * @return A single threaded scheduled executor service.
+     */
+    public ScheduledExecutorService getSingleThreadedScheduledExecutor(String name) {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, factory);
 
         executor.allowCoreThreadTimeOut(true);
         return executor;
