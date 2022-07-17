@@ -16,7 +16,7 @@ def pluginName = 'LyraLibs-Bukkit'
 def code = 0
 
 dependencies {
-    otherProjects project(":core")
+    compileOnly project(":core")
     otherProjects project(":version-support")
     otherProjects project(":version-support1_8")
     otherProjects project(":version-support1_13")
