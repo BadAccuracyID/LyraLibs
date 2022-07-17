@@ -6,6 +6,8 @@ configurations {
     extraLibs
 }
 
+def code = 0
+
 dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
@@ -24,10 +26,20 @@ dependencies {
     configurations.compileOnly.extendsFrom(configurations.extraLibs)
 }
 
+task updateBuildNumber {
+    def versionPropsFile = file 'version.properties'
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    code = versionProps['VERSION_CODE'].toInteger() + 1
+
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+}
+
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    archiveFileName = "LyraLibs-Core.jar"
+    archiveFileName = "LyraLibs-Core b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
