@@ -39,6 +39,7 @@ public class ExecutorUtils {
                 new LinkedBlockingQueue<>(),
                 factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
@@ -54,6 +55,7 @@ public class ExecutorUtils {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(poolSize, factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
@@ -72,6 +74,7 @@ public class ExecutorUtils {
                 new SynchronousQueue<>(),
                 factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
@@ -86,6 +89,7 @@ public class ExecutorUtils {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(Integer.MAX_VALUE, factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
@@ -104,6 +108,7 @@ public class ExecutorUtils {
                 new LinkedBlockingQueue<>(),
                 factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
@@ -119,6 +124,7 @@ public class ExecutorUtils {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, factory);
 
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
