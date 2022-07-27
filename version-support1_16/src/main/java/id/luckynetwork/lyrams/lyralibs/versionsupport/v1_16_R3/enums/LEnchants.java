@@ -1,4 +1,4 @@
-package id.luckynetwork.lyrams.lyralibs.versionsupport.enums;
+package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R3.enums;
 
 import lombok.Getter;
 import org.bukkit.enchantments.Enchantment;

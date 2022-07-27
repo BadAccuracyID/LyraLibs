@@ -1,8 +1,9 @@
-package id.luckynetwork.lyrams.lyralibs.versionsupport;
+package id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R3;
 
-import id.luckynetwork.lyrams.lyralibs.versionsupport.enums.LEffects;
-import id.luckynetwork.lyrams.lyralibs.versionsupport.enums.LEnchants;
-import id.luckynetwork.lyrams.lyralibs.versionsupport.enums.LItemStack;
+import id.luckynetwork.lyrams.lyralibs.versionsupport.VersionSupport;
+import id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R3.enums.LEffects;
+import id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R3.enums.LEnchants;
+import id.luckynetwork.lyrams.lyralibs.versionsupport.v1_16_R3.enums.LItemStack;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
