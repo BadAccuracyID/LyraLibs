@@ -29,7 +29,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        run: ./gradlew core:build version-support:build version-support1_8:build version-support1_13:build version-support1_16:build build
+        run: ./gradlew core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
       - uses: actions/upload-artifact@v2
         with:
           name: LyraLibs

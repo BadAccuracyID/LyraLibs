@@ -19,7 +19,9 @@ dependencies {
     compileOnly project(":core")
     otherProjects project(":version-support")
     otherProjects project(":version-support1_8")
+    otherProjects project(":version-support1_12")
     otherProjects project(":version-support1_13")
+    otherProjects project(":version-support1_16")
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
