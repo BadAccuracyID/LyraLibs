@@ -76,9 +76,12 @@ public class DateUtils {
      */
     public long durationToLong(String duration) {
         String[] split = duration.split("(?<=[a-zA-Z])|(?=[a-zA-Z])");
+        if (split.length <= 1 || duration.equals("-1")) {
+            return -1L;
+        }
+
         int amount = Integer.parseInt(split[0]);
         String unit = split[1];
-
         switch (unit.toUpperCase()) {
             case "S":
             case "SEC":
