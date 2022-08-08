@@ -1,11 +1,13 @@
 package id.luckynetwork.lyrams.lyralibs.core.database.mysql;
 
+import id.luckynetwork.lyrams.lyralibs.core.closer.Closer;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 @AllArgsConstructor
 public class Query {
@@ -16,23 +18,12 @@ public class Query {
     /**
      * Execute the SQL query and close the statement.
      */
-    public void execute() {
-        Statement statement = null;
-        try {
-            Connection connection = mySQL.getConnection();
+    public void execute() throws SQLException {
+        try (Closer closer = new Closer()) {
+            Connection connection = mySQL.isUseHikari() ? closer.add(Objects.requireNonNull(mySQL.getHikariDataSource()).getConnection()) : mySQL.getConnection();
+            Statement statement = closer.add(connection.createStatement());
 
-            statement = connection.createStatement();
             statement.execute(sqlQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

@@ -17,6 +17,8 @@ dependencies {
     compileOnly 'redis.clients:jedis:3.7.0'
     // gson
     compileOnly 'com.google.code.gson:gson:2.8.6'
+    // hikariCP
+    compileOnly 'com.zaxxer:HikariCP:5.0.1'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.20'
