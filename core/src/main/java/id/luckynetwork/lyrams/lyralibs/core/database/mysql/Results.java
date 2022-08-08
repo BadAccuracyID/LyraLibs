@@ -18,12 +18,15 @@ public class Results implements AutoCloseable {
     @Override
     public void close() {
         try {
-            resultSet.close();
+            connection.close();
         } catch (Exception ignored) {
         }
-
         try {
             statement.close();
+        } catch (Exception ignored) {
+        }
+        try {
+            resultSet.close();
         } catch (Exception ignored) {
         }
     }
