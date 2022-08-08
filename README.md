@@ -1,9 +1,13 @@
 ## How to add dependency
-
+#### Gradle:
 ``` gradle
     repositories {
         maven {
-            url 'https://BadAccuracyID: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@maven.pkg.github.com/BadAccuracyID/LyraLibs'
+            url = uri("https://maven.pkg.github.com/BadAccuracyID/LyraLibs")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            }
         }
     }
     
@@ -13,6 +17,13 @@
         implementation 'com.badaccuracy.lyralibs:bukkit:CHECK_PACKAGES_VERSION'
         implementation 'com.badaccuracy.lyralibs:velocity:CHECK_PACKAGES_VERSION'
     }
+```
+
+#### Create gradle.properties:
+```
+gpr.user=BadAccuracyID
+# read-only
+gpr.key=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
 ```
 
 ## Credits
