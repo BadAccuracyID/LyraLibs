@@ -37,3 +37,25 @@ jobs:
             core/build/libs/
             bukkit/build/libs/
             velocity/build/libs/
+
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v2.0.
+        with:
+          token: ${{ github.TOKEN }}
+          package-name: 'id.luckynetwork.lyrams.lyralibs.core'
+          min-versions-to-keep: 5
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v2.0.
+        with:
+          token: ${{ github.TOKEN }}
+          package-name: 'id.luckynetwork.lyrams.lyralibs.bukkit'
+          min-versions-to-keep: 5
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v2.0.
+        with:
+          token: ${{ github.TOKEN }}
+          package-name: 'id.luckynetwork.lyrams.lyralibs.velocity'
+          min-versions-to-keep: 5
+
+      - name: Publish with Gradle
+        run: ./gradlew publish
