@@ -49,6 +49,8 @@ task updateBuildNumber {
 
     code = versionProps['VERSION_CODE'].toInteger() + 1
 
+    project.version = "b" + code.toString()
+
     versionProps['VERSION_CODE'] = code.toString()
     versionProps.store(versionPropsFile.newWriter(), null)
 }
