@@ -46,5 +46,16 @@ jobs:
           title: "Development Build"
           files: |
             core/build/libs/
-            bukkit/build/libs/
-            velocity/build/libs/
+            bukkit/build/libs/normal
+            velocity/build/libs/normal
+
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest-light"
+          prerelease: true
+          title: "Development Build-Light"
+          files: |
+            core/build/libs/
+            bukkit/build/libs/light
+            velocity/build/libs/light

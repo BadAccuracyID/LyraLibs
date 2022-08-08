@@ -56,7 +56,7 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "LyraLibs-Bukkit b" + code.toString() + ".jar"
+    archiveFileName = "normal/LyraLibs-Bukkit b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
@@ -70,7 +70,7 @@ task jarLight(type: Jar) {
     from sourceSets.main.output
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "LyraLibs-Bukkit-Light b" + code.toString() + ".jar"
+    archiveFileName = "light/LyraLibs-Bukkit-Light b" + code.toString() + ".jar"
 
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
