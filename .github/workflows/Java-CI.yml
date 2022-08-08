@@ -37,3 +37,14 @@ jobs:
             core/build/libs/
             bukkit/build/libs/
             velocity/build/libs/
+
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            core/build/libs/
+            bukkit/build/libs/
+            velocity/build/libs/
