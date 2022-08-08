@@ -3,6 +3,9 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
 }
+plugins {
+    id 'maven-publish'
+}
 
 configurations {
     otherProjects
@@ -80,6 +83,24 @@ processResources {
             "name"     : pluginName,
             "number"   : code.toString()
     ]
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "LyraLibs-Velocity"
+            url = uri("https://maven.pkg.github.com/BadAccuracyID/LyraLibs")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
 }
 
 assemble.dependsOn(jarLight)
