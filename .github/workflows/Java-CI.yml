@@ -28,6 +28,8 @@ jobs:
           versions: 1.8.8, 1.12.2, 1.13.2, 1.16.5
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+      - name: Clean with Gradle
+        run: ./gradlew clean
       - name: Build with Gradle
         run: ./gradlew core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
 
