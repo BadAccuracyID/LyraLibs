@@ -38,24 +38,56 @@ jobs:
             bukkit/build/libs/
             velocity/build/libs/
 
+
+      # Ok, there might be a better way to do this, but idc
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.TOKEN }}"
-          automatic_release_tag: "latest"
+          automatic_release_tag: "latest-core"
           prerelease: true
-          title: "Development Build"
+          title: "Core"
           files: |
             core/build/libs/
+
+
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest-bukkit"
+          prerelease: true
+          title: "Bukkit"
+          files: |
             bukkit/build/libs/normal
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest-velocity"
+          prerelease: true
+          title: "Velocity"
+          files: |
             velocity/build/libs/normal
 
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.TOKEN }}"
-          automatic_release_tag: "latest-light"
+          automatic_release_tag: "latest-light-core"
           prerelease: true
-          title: "Development Build-Light"
+          title: "Core-Light"
           files: |
             core/build/libs/
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest-light-bukkit"
+          prerelease: true
+          title: "Bukkit-Light"
+          files: |
             bukkit/build/libs/light
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          automatic_release_tag: "latest-light-velocity"
+          prerelease: true
+          title: "Velocity-Light"
+          files: |
             velocity/build/libs/light
