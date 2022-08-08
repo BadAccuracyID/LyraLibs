@@ -30,13 +30,6 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: LyraLibs
-          path: |
-            core/build/libs/
-            bukkit/build/libs/
-            velocity/build/libs/
 
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v2.0.1
@@ -59,8 +52,8 @@ jobs:
 
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.2.2
-        with:
-          arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           GITHUB_USERNAME: ${{ secrets.USERNAME }}
+        with:
+          arguments: publish
