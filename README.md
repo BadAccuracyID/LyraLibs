@@ -23,13 +23,14 @@
 ```
 gpr.user=BadAccuracyID
 # read-only
-gpr.key=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
+gpr.key=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
 ```
+Note: please exclude gradle.properties from the repository, or it'll break the key, k thxbye (yea it's super exploitable, idc, i'll fix it one day)
 
 #### Add github actions secret token
 ```
 USERNAME=BadAccuracyID
-TOKEN=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
+TOKEN=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
 ```
 
 ## Credits
