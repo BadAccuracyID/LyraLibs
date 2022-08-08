@@ -57,5 +57,9 @@ jobs:
           package-name: 'id.luckynetwork.lyrams.lyralibs.velocity'
           min-versions-to-keep: 5
 
-      - name: Publish with Gradle
-        run: ./gradlew publish
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          arguments: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
