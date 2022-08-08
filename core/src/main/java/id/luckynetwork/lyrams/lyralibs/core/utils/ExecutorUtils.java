@@ -45,6 +45,26 @@ public class ExecutorUtils {
     }
 
     /**
+     * > It creates a fixed size thread pool with a custom thread factory that sets the thread name and a custom uncaught
+     * exception handler that logs the exception
+     *
+     * @param name The name of the thread pool.
+     * @param poolSize The size of the thread pool.
+     * @return A fixed thread pool executor service.
+     */
+    public ExecutorService getFixedExecutorService(String name, int poolSize) {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(poolSize, poolSize,
+                15L, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(),
+                factory);
+
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
+    }
+
+    /**
      * > It creates a new `ScheduledExecutorService` with a fixed pool size, and a `ThreadFactory` that creates threads
      * with a name format of `name` and a `LuckyThreadFactory` that creates threads with a name format of `name`
      *
@@ -52,6 +72,23 @@ public class ExecutorUtils {
      * @return A ScheduledExecutorService
      */
     public ScheduledExecutorService getFixedScheduledExecutorService(String name) {
+        ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(poolSize, factory);
+
+        executor.setKeepAliveTime(5, TimeUnit.SECONDS);
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
+    }
+
+    /**
+     * > It creates a new `ScheduledExecutorService` with a fixed pool size, and a `ThreadFactory` that creates threads
+     * with a name format of `name` and a `LuckyThreadFactory` that creates threads with a name format of `name`
+     *
+     * @param name The name of the thread pool.
+     * @param poolSize The size of the thread pool.
+     * @return A ScheduledExecutorService
+     */
+    public ScheduledExecutorService getFixedScheduledExecutorService(String name, int poolSize) {
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat(name).setThreadFactory(new LuckyThreadFactory(name)).build();
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(poolSize, factory);
 
