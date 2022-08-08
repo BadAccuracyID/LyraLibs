@@ -55,22 +55,22 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "normal/LyraLibs-Velocity b" + code.toString() + ".jar"
+    archiveFileName = "light/LyraLibs-Velocity b" + code.toString() + ".jar"
 
-    from {
-        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
-    }
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
-task jarLight(type: Jar) {
+task jarHeavy(type: Jar) {
     from sourceSets.main.output
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "light/LyraLibs-Velocity-Light b" + code.toString() + ".jar"
+    archiveFileName = "normal/LyraLibs-Velocity-Light b" + code.toString() + ".jar"
 
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
     }
@@ -103,4 +103,4 @@ publishing {
     }
 }
 
-assemble.dependsOn(jarLight)
+assemble.dependsOn(jarHeavy)

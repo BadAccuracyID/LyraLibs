@@ -3,6 +3,9 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
 }
+plugins {
+    id 'maven-publish'
+}
 
 configurations {
     otherProjects
@@ -56,22 +59,22 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "normal/LyraLibs-Bukkit b" + code.toString() + ".jar"
+    archiveFileName = "light/LyraLibs-Bukkit b" + code.toString() + ".jar"
 
-    from {
-        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
-    }
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
-task jarLight(type: Jar) {
+task jarHeavy(type: Jar) {
     from sourceSets.main.output
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "light/LyraLibs-Bukkit-Light b" + code.toString() + ".jar"
+    archiveFileName = "normal/LyraLibs-Bukkit-Light b" + code.toString() + ".jar"
 
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
     }
@@ -86,4 +89,22 @@ processResources {
     ]
 }
 
-assemble.dependsOn(jarLight)
+publishing {
+    repositories {
+        maven {
+            name = "LyraLibs-Core"
+            url = uri("https://maven.pkg.github.com/BadAccuracyID/LyraLibs")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+assemble.dependsOn(jarHeavy)

@@ -1,6 +1,9 @@
 plugins {
     id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
 }
+plugins {
+    id 'maven-publish'
+}
 
 configurations {
     extraLibs
@@ -45,5 +48,23 @@ jar {
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "LyraLibs-Core"
+            url = uri("https://maven.pkg.github.com/BadAccuracyID/LyraLibs")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
     }
 }
