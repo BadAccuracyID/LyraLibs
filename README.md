@@ -23,7 +23,13 @@
 ```
 gpr.user=BadAccuracyID
 # read-only
-gpr.key=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
+gpr.key=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
+```
+
+#### Add github actions secret token
+```
+USERNAME=BadAccuracyID
+TOKEN=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
 ```
 
 ## Credits
