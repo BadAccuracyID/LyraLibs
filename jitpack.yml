@@ -20,3 +20,4 @@ install:
   - echo "Deleting BuildTools file"
   - rm -rf /home/jitpack/build/spigot
   - rm -rf /home/jitpack/.m2/repository/org/spigotmc/
+  - rm -rf /home/jitpack/.m2/repository/org/bukkit/
