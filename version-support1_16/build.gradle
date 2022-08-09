@@ -9,14 +9,14 @@ configurations {
 dependencies {
     implementation project(":version-support")
 
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // lombok
-    compileOnly 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
     // jetbrains annotations
-    compileOnly 'org.jetbrains:annotations:20.1.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     // spigot 1.16
-    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    compileOnly files("../aLibs/spigot/spigot-api-1.16.5-R0.1-SNAPSHOT.jar")
 
     configurations.compileOnly.extendsFrom(configurations.extraLibs)
 }
@@ -29,4 +29,8 @@ jar {
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+repositories {
+    mavenCentral()
 }

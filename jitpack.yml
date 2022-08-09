@@ -2,22 +2,22 @@ jdk:
   - openjdk8
 install:
   - echo "Running a custom install command"
-  - echo "Installing BuildTools..."
-  - mkdir spigot
-  - cd spigot
-  - wget -O BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-  - java -jar BuildTools.jar --rev 1.8.8
-  - java -jar BuildTools.jar --rev 1.12.2
-  - java -jar BuildTools.jar --rev 1.13.2
-  - java -jar BuildTools.jar --rev 1.16.5
-  - echo "Doing gradle stuff..."
-  - cd ..
+#  - echo "Installing BuildTools..."
+#  - mkdir spigot
+#  - cd spigot
+#  - wget -O BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+#  - java -jar BuildTools.jar --rev 1.8.8
+#  - java -jar BuildTools.jar --rev 1.12.2
+#  - java -jar BuildTools.jar --rev 1.13.2
+#  - java -jar BuildTools.jar --rev 1.16.5
+#  - echo "Doing gradle stuff..."
+#  - cd ..
   - sdk install java 17.0.4-zulu
   - sdk use java 17.0.4-zulu
   - chmod +x ./gradlew
   - ./gradlew clean core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
   - ./gradlew build publishToMavenLocal
-  - echo "Deleting BuildTools file"
-  - rm -rf /home/jitpack/build/spigot
-  - rm -rf /home/jitpack/.m2/repository/org/spigotmc/
-  - rm -rf /home/jitpack/.m2/repository/org/bukkit/
+#  - echo "Deleting BuildTools file"
+#  - rm -rf /home/jitpack/build/spigot
+#  - rm -rf /home/jitpack/.m2/repository/org/spigotmc/
+#  - rm -rf /home/jitpack/.m2/repository/org/bukkit/
