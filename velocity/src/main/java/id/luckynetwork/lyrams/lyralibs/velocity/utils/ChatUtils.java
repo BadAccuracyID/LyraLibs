@@ -44,7 +44,7 @@ public class ChatUtils {
      * It replaces all ampersands in a string with dollar signs
      *
      * @param text The text to colorize
-     * @return The text with the & replaced with $
+     * @return The text with the ampersand sign replaced with section sign
      */
     public String colorizeFast(String text) {
         return StringUtils.replace(text, "&", "§");
