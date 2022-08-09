@@ -3,9 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 plugins {
     id 'id.luckynetwork.lyrams.lyralibs.java-conventions'
 }
-plugins {
-    id 'maven-publish'
-}
+apply plugin: 'maven-publish'
 
 configurations {
     otherProjects
