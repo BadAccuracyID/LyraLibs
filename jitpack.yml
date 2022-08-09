@@ -12,6 +12,8 @@ install:
   - java -jar BuildTools.jar --rev 1.16.5
   - echo "Doing gradle stuff..."
   - cd ..
+  - sdk install java 17.36.15-zulu
+  - sdk use java 17.36.15-zulu
   - chmod +x ./gradlew
   - ./gradlew clean core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
   - ./gradlew install
