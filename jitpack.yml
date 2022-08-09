@@ -18,6 +18,3 @@ install:
   - ./gradlew clean core:build version-support:build version-support1_8:build version-support1_12:build version-support1_13:build version-support1_16:build build
   - ./gradlew build publishToMavenLocal
   - echo "Deleting BuildTools file"
-  - rm -rf /home/jitpack/build/spigot
-  - rm -rf /home/jitpack/.m2/repository/org/spigotmc/
-  - rm -rf /home/jitpack/.m2/repository/org/bukkit/
