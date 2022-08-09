@@ -16,7 +16,7 @@ dependencies {
     // jetbrains annotations
     compileOnly 'org.jetbrains:annotations:23.0.0'
     // spigot 1.12
-    compileOnly files("../aLibs/spigot/spigot-api-1.12.2-R0.1-20180712.012057-156.jar")
+    compileOnly files("../aLibs/spigot/spigot-api-1.12.2-R0.1-SNAPSHOT.jar")
 
     configurations.compileOnly.extendsFrom(configurations.extraLibs)
 }
