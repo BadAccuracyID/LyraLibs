@@ -55,6 +55,9 @@ repositories {
     mavenCentral()
 }
 
-javadoc {
-    source = sourceSets.main.allJava
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveFileName = "LyraLibs-Core b" + code.toString() + "-javadoc.jar"
 }
+
+assemble.dependsOn(javadocJar)

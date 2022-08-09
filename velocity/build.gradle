@@ -66,7 +66,7 @@ task jarHeavy(type: Jar) {
     from sourceSets.main.output
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "normal/LyraLibs-Velocity-Light b" + code.toString() + ".jar"
+    archiveFileName = "normal/LyraLibs-Velocity-shaded b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
@@ -89,8 +89,10 @@ repositories {
     mavenCentral()
 }
 
-javadoc {
-    source = sourceSets.main.allJava
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveFileName = "LyraLibs-Velocity b" + code.toString() + "-javadoc.jar"
 }
 
 assemble.dependsOn(jarHeavy)
+assemble.dependsOn(javadocJar)
