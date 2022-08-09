@@ -19,7 +19,26 @@ subprojects {
 
                 pom {
                     name = 'LyraLibs'
-                    description = 'A collection of commonly used methods for making bad Minecraft plugins.'
+                    description = 'LyraLibs is a publicly available library for making spigot plugins.'
+                    url = 'https://github.com/BadAccuracyID/LyraLibs/'
+                    developers {
+                        developer {
+                            id = 'badaccuracyid'
+                            name = 'BadAccuracyID'
+                            email = 'badaccuracy.id@gmail.com'
+                        }
+                    }
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/BadAccuracyID/LyraLibs.git'
+                        developerConnection = 'scm:git:ssh://github.com/BadAccuracyID/LyraLibs.git'
+                        url = 'https://github.com/BadAccuracyID/LyraLibs/'
+                    }
                 }
             }
         }
