@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SwitchableMenu extends LuckyMenu {
+public abstract class SwitchableMenu extends LyraMenu {
 
     @Getter
     private int page = 1;

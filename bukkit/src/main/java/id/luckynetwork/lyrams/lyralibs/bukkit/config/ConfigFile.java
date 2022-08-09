@@ -1,14 +1,14 @@
 package id.luckynetwork.lyrams.lyralibs.bukkit.config;
 
-import id.luckynetwork.lyrams.lyralibs.core.config.LYamlConfiguration;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigFile extends LYamlConfiguration {
+public class ConfigFile extends YamlConfiguration {
 
     @Getter
     private final File file;

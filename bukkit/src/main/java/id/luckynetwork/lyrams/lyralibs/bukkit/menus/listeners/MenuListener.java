@@ -1,7 +1,7 @@
 package id.luckynetwork.lyrams.lyralibs.bukkit.menus.listeners;
 
 import id.luckynetwork.lyrams.lyralibs.bukkit.LyraLibsBukkit;
-import id.luckynetwork.lyrams.lyralibs.bukkit.menus.menu.LuckyMenu;
+import id.luckynetwork.lyrams.lyralibs.bukkit.menus.menu.LyraMenu;
 import id.luckynetwork.lyrams.lyralibs.bukkit.menus.slots.Slot;
 import lombok.AllArgsConstructor;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class MenuListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        LuckyMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
+        LyraMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
         if (menu != null) {
             if (!menu.getName(player).equals(player.getOpenInventory().getTopInventory().getName())) {
                 menu.onClose(player);
@@ -40,7 +40,7 @@ public class MenuListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
-        LuckyMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
+        LyraMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
         if (menu != null) {
             menu.onClose(player);
             LyraLibsBukkit.getMenuManager().getLastOpenedMenus().remove(player.getUniqueId());
@@ -50,7 +50,7 @@ public class MenuListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        LuckyMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
+        LyraMenu menu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
         if (menu != null) {
             menu.onClose(player);
             LyraLibsBukkit.getMenuManager().getLastOpenedMenus().remove(player.getUniqueId());

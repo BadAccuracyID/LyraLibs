@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class LuckyMenu {
+public abstract class LyraMenu {
 
     @Getter
     private List<Slot> slots = new ArrayList<>();
@@ -26,8 +26,13 @@ public abstract class LuckyMenu {
 
     public abstract String getName(Player player);
 
+    /**
+     * It opens the menu
+     *
+     * @param player The player who is opening the menu.
+     */
     public void open(Player player) {
-        LuckyMenu previous = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
+        LyraMenu previous = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
         if (previous != null) {
             previous.onClose(player);
             LyraLibsBukkit.getMenuManager().getOpenedMenus().remove(player.getUniqueId());
@@ -54,13 +59,18 @@ public abstract class LuckyMenu {
         this.onOpen(player);
     }
 
+    /**
+     * Refreshes the inventory view
+     *
+     * @param player The player who is opening the menu
+     */
     public void update(Player player) {
         this.slots = this.getSlots(player);
         String title = this.getName(player);
 
         boolean passed = false;
         Inventory inventory = null;
-        LuckyMenu openedMenu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
+        LyraMenu openedMenu = LyraLibsBukkit.getMenuManager().getOpenedMenus().get(player.getUniqueId());
         Inventory current = player.getOpenInventory().getTopInventory();
 
         if (openedMenu != null && openedMenu.getName(player).equals(current.getTitle()) && current.getSize() == this.getInventorySize(this.slots)) {
@@ -129,9 +139,19 @@ public abstract class LuckyMenu {
                 .findFirst().orElse(null);
     }
 
+    /**
+     * Called when the menu is opened
+     *
+     * @param player The player who opened the inventory.
+     */
     public void onOpen(Player player) {
     }
 
+    /**
+     * Called when the menu is closed
+     *
+     * @param player The player who closed the menu
+     */
     public void onClose(Player player) {
         LyraLibsBukkit.getMenuManager().getLastOpenedMenus().remove(player.getUniqueId());
         LyraLibsBukkit.getMenuManager().getLastOpenedMenus().put(player.getUniqueId(), this);

@@ -28,7 +28,7 @@ public class LyraTasks {
 
     /**
      * "Submit a task to the executor and return a Future object."
-     *
+     * <p>
      * The above function is a static method of the LyraTasks class. It returns a Future object. The Future object is a
      * Java class that represents the result of an asynchronous computation. The Future object is returned immediately, and
      * the task is executed asynchronously
@@ -53,7 +53,7 @@ public class LyraTasks {
      *
      * @param callable The task to be executed.
      * @param timeUnit The time unit to use for the delay.
-     * @param delay The amount of time to wait before executing the task.
+     * @param delay    The amount of time to wait before executing the task.
      * @return A Future object.
      */
     public static Future<?> submitLater(Callable callable, TimeUnit timeUnit, long delay) {
@@ -92,7 +92,7 @@ public class LyraTasks {
      *
      * @param callable The callable to run.
      * @param timeUnit The time unit to use for the delay.
-     * @param delay The amount of time to delay the execution of the task.
+     * @param delay    The amount of time to delay the execution of the task.
      * @return A CompletableFuture that will run the callable after the delay.
      */
     public static CompletableFuture<Void> runAsyncLater(Callable callable, TimeUnit timeUnit, long delay) {
@@ -131,8 +131,8 @@ public class LyraTasks {
      * It returns a CompletableFuture that will return the result of the given Returnable after the given delay.
      *
      * @param returnable The returnable object that will be executed.
-     * @param timeUnit The time unit to use for the delay.
-     * @param delay The amount of time to wait before executing the task.
+     * @param timeUnit   The time unit to use for the delay.
+     * @param delay      The amount of time to wait before executing the task.
      * @return A CompletableFuture object.
      */
     public static CompletableFuture<?> supplyAsyncLater(Returnable<?> returnable, TimeUnit timeUnit, long delay) {
@@ -163,7 +163,7 @@ public class LyraTasks {
      *
      * @param callable The callable to run
      * @param timeUnit The time unit of the delay.
-     * @param delay The amount of time to wait before running the task
+     * @param delay    The amount of time to wait before running the task
      */
     public static void runSyncLater(Callable callable, TimeUnit timeUnit, long delay) {
         Bukkit.getScheduler().runTaskLater(LyraLibsBukkit.getPlugin(), callable::call, DateUtils.toTicks(delay, timeUnit));
@@ -173,7 +173,7 @@ public class LyraTasks {
      * Runs a callable after a delay.
      *
      * @param callable The callable to run.
-     * @param delay The amount of ticks to wait before running the task.
+     * @param delay    The amount of ticks to wait before running the task.
      */
     public static void runSyncLater(Callable callable, long delay) {
         Bukkit.getScheduler().runTaskLater(LyraLibsBukkit.getPlugin(), callable::call, delay);

@@ -12,11 +12,23 @@ public class IsDoubleCallback {
     private boolean isDouble = false;
     private double value = -1.0;
 
+    /**
+     * This function sets the value of the variable value to the value of the parameter value and returns this.
+     *
+     * @param value The value to compare against.
+     * @return The object itself.
+     */
     public IsDoubleCallback setValue(double value) {
         this.value = value;
         return this;
     }
 
+    /**
+     * This function sets the isDouble variable to the value of the isDouble parameter.
+     *
+     * @param isDouble Whether or not the callback is a double callback.
+     * @return The object itself.
+     */
     public IsDoubleCallback setDouble(boolean isDouble) {
         this.isDouble = isDouble;
         return this;

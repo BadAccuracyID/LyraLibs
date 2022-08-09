@@ -36,7 +36,7 @@ public abstract class VersionSupport {
     /**
      * It returns an ItemStack of the item with the given name, amount, and damage
      *
-     * @param name The name of the item.
+     * @param name   The name of the item.
      * @param amount The amount of the item you want to get.
      * @param damage The damage value of the item.
      * @return An ItemStack

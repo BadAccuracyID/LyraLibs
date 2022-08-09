@@ -162,7 +162,6 @@ public class DateUtils {
             builder.append(seconds).append("s");
         }
 
-
         return builder.toString();
     }
 
