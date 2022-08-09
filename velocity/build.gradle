@@ -19,20 +19,20 @@ def code = 0
 dependencies {
     compileOnly project(":core")
 
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'com.velocitypowered:velocity-api:3.0.1'
 
     //mongodb
-    extraLibs 'org.mongodb:mongo-java-driver:3.12.10'
+    extraLibs 'org.mongodb:mongo-java-driver:3.12.11'
     // jedis
     extraLibs 'redis.clients:jedis:3.7.0'
     // gson
-    extraLibs 'com.google.code.gson:gson:2.8.6'
+    extraLibs 'com.google.code.gson:gson:2.9.0'
 
     // lombok
-    compileOnly 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
     // jetbrains annotations
-    compileOnly 'org.jetbrains:annotations:20.1.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     // velocity
     compileOnly 'com.velocitypowered:velocity-api:3.0.1'
 
@@ -83,6 +83,10 @@ processResources {
             "name"     : pluginName,
             "number"   : code.toString()
     ]
+}
+
+repositories {
+    mavenCentral()
 }
 
 //publishing {

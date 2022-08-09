@@ -21,7 +21,3 @@ install:
   - rm -rf /home/jitpack/build/spigot
   - rm -rf /home/jitpack/.m2/repository/org/spigotmc/
   - rm -rf /home/jitpack/.m2/repository/org/bukkit/
-  - cd /home/jitpack/.m2/repository/id/luckynetwork/lyrams/lyralibs
-  - ls
-  - cd /home/jitpack/.m2/repository/id/luckynetwork/lyrams/lyralibs/core
-  - ls

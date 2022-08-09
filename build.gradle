@@ -15,7 +15,10 @@ subprojects {
     publishing {
         publications {
             maven(MavenPublication) {
-                from(components.java)
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
 
                 pom {
                     name = 'LyraLibs'
