@@ -280,7 +280,7 @@ public class RedisHandler {
     /**
      * It sends an object to a specific server
      *
-     * @param object The object to send
+     * @param object       The object to send
      * @param targetServer The server to send the object to.
      */
     public void sendObject(Object object, @NotNull String targetServer) {

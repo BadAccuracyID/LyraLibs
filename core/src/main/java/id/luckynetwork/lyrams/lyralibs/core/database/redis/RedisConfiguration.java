@@ -1,40 +1,73 @@
 package id.luckynetwork.lyrams.lyralibs.core.database.redis;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
 
 @Getter
-@Setter
-@Builder(builderMethodName = "newBuilder")
+@RequiredArgsConstructor
 public class RedisConfiguration {
 
     /*
      * The redis host
      */
-    private final String host = "localhost";
+    private final String host;
     /*
      * The redis host's port
      */
-    private final int port = 6379;
+    private final int port;
     /*
-     * timeout before a connection is considered failed
+     * the redis channel to use for pub/sub
      */
-    private final int timeout = 30_000;
-
+    private final String channel;
     /*
      * the redis password, set to null if not needed
      */
     @Nullable
-    private final String password = null;
+    private String password = null;
     /*
      * the client name
      */
-    private final String clientName = "RedisClient";
+    private String clientName = "RedisClient";
+
     /*
-     * the redis channel to use for pub/sub
+     * timeout before a connection is considered failed
      */
-    private final String channel = "RedisChannel";
+    private int timeout = 30_000;
+
+    /**
+     * Sets the password for the Redis server.
+     * Set to null if not needed.
+     *
+     * @param password The password to use for authentication.
+     * @return The RedisConfiguration object.
+     */
+    public RedisConfiguration setPassword(@Nullable String password) {
+        this.password = password;
+        return this;
+    }
+
+    /**
+     * Sets the client name
+     *
+     * @param clientName The name of the client.
+     * @return The RedisConfiguration object.
+     */
+    public RedisConfiguration setClientName(String clientName) {
+        this.clientName = clientName;
+        return this;
+    }
+
+    /**
+     * Sets the timeout before a connection is considered failed
+     * object.
+     *
+     * @param timeout The timeout for the connection to the Redis server.
+     * @return The RedisConfiguration object.
+     */
+    public RedisConfiguration setTimeout(int timeout) {
+        this.timeout = timeout;
+        return this;
+    }
 
 }
