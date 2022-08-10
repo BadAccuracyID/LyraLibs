@@ -58,12 +58,6 @@ public class LyraTasks {
                 .submit(() -> {
                             try {
                                 timeUnit.sleep(delay);
-    /**
-     * Runs the given callable asynchronously and returns a CompletableFuture that completes when the callable completes.
-     *
-     * @param callable The callable to run.
-     * @return A CompletableFuture that will run the callable asynchronously.
-     */
                                 callable.call();
                             } catch (Exception e) {
                                 e.printStackTrace();
