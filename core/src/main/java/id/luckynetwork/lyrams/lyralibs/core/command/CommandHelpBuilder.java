@@ -56,7 +56,7 @@ public class CommandHelpBuilder {
 
     private void buildCommandHelp(List<CommandHelpInfo> commandHelpInfo, List<String> helpCommand) {
         commandHelpInfo.forEach(it -> {
-            helpCommand.add("§8├─ §f" + it.getCommand() + " §e" + it.getDescription() + ".");
+            helpCommand.add("§8├─ §f" + it.getCommand() + " §e" + it.getDescription());
             CommandExampleInfo exampleInfo = it.getExample();
             if (exampleInfo != null) {
                 helpCommand.add("§8├─ §7Example: §a" + exampleInfo.getExample());
