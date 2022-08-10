@@ -29,7 +29,6 @@ public class CommandHelpBuilder {
         helpCommand.add(" ");
 
         buildCommandHelp(commandHelpInfo, helpCommand);
-
         return helpCommand;
     }
 
@@ -52,14 +51,13 @@ public class CommandHelpBuilder {
         helpCommand.add(" ");
 
         buildCommandHelp(commandHelpInfo, helpCommand);
-
         return helpCommand;
     }
 
     private void buildCommandHelp(List<CommandHelpInfo> commandHelpInfo, List<String> helpCommand) {
         commandHelpInfo.forEach(it -> {
-            helpCommand.add("§8├─ §f/" + it.getCommand() + " §e" + it.getDescription() + ".");
-            CommandExampleInfo exampleInfo = it.getInfo();
+            helpCommand.add("§8├─ §f" + it.getCommand() + " §e" + it.getDescription() + ".");
+            CommandExampleInfo exampleInfo = it.getExample();
             if (exampleInfo != null) {
                 helpCommand.add("§8├─ §7Example: §a" + exampleInfo.getExample());
                 exampleInfo.getDescriptionMap().forEach((key, val) -> helpCommand.add("          §8├─ §7" + key + ": §a" + val + ""));
