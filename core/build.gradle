@@ -44,7 +44,6 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "LyraLibs-Core b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
@@ -55,9 +54,15 @@ repositories {
     mavenCentral()
 }
 
-task javadocJar(type: Jar) {
-    from javadoc
-    archiveFileName = "LyraLibs-Core b" + code.toString() + "-javadoc.jar"
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
 
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+assemble.dependsOn(sourcesJar)
 assemble.dependsOn(javadocJar)

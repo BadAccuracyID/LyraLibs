@@ -55,7 +55,6 @@ task updateBuildNumber {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "light/LyraLibs-Velocity b" + code.toString() + ".jar"
 
     from {
         configurations.otherProjects.collect { it.isDirectory() ? it : zipTree(it) }
@@ -66,7 +65,7 @@ task jarHeavy(type: Jar) {
     from sourceSets.main.output
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName = "normal/LyraLibs-Velocity-shaded b" + code.toString() + ".jar"
+    archiveFileName = "shaded/LyraLibs-Velocity-shaded b" + code.toString() + ".jar"
 
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
@@ -89,10 +88,16 @@ repositories {
     mavenCentral()
 }
 
-task javadocJar(type: Jar) {
-    from javadoc
-    archiveFileName = "LyraLibs-Velocity b" + code.toString() + "-javadoc.jar"
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
 
-assemble.dependsOn(jarHeavy)
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+assemble.dependsOn(sourcesJar)
 assemble.dependsOn(javadocJar)
+assemble.dependsOn(jarHeavy)
