@@ -2,7 +2,6 @@ package id.luckynetwork.lyrams.lyralibs.core.utils;
 
 import lombok.experimental.UtilityClass;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -11,35 +10,52 @@ import java.util.concurrent.TimeUnit;
 @UtilityClass
 public class DateUtils {
 
-    private final SimpleDateFormat DATE_FORMAT;
+    private SimpleDateFormat dateFormat;
 
     static {
-        DATE_FORMAT = new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy");
-        DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+        dateFormat = new SimpleDateFormat("HH:mm:ss - dd/MM/yyyy");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+7"));
     }
 
     /**
-     * This function returns the current date in the format of yyyy-MM-dd HH:mm:ss.
+     * This function sets the date format to the format specified by the user.
      *
-     * @return The current date and time in the format of "yyyy-MM-dd HH:mm:ss"
+     * @param format The format of the date.
+     */
+    public void setDateFormat(String format) {
+        dateFormat = new SimpleDateFormat(format);
+    }
+
+    /**
+     * Set the time zone for the date format.
+     *
+     * @param timeZone The time zone to use for the date format.
+     */
+    public void setTimeZone(String timeZone) {
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+    }
+
+    /**
+     * This function returns the current date
+     *
+     * @return The current date and time
      */
     public String getFormattedDate() {
-        return DATE_FORMAT.format(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(7L));
+        return toDate(System.currentTimeMillis());
     }
 
     /**
-     * Convert milliseconds to date
+     * > It takes a long value representing milliseconds since the epoch, and returns a string representing the date in the
+     * format "yyyy-MM-dd"
      *
-     * @param millis The time in milliseconds.
-     * @return A string representation of the date and time in the format HH:mm:ss EEE, dd/MM/yyyy Z
+     * @param millis The time in milliseconds to convert to a date.
+     * @return A string representation of the date.
      */
     public String toDate(long millis) {
-        DateFormat formatter = new SimpleDateFormat("HH:mm:ss EEE, dd/MM/yyyy Z");
-        formatter.setTimeZone(TimeZone.getTimeZone("GMT+7"));
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(millis);
-        return formatter.format(calendar.getTime());
+
+        return dateFormat.format(calendar.getTime());
     }
 
     /**
