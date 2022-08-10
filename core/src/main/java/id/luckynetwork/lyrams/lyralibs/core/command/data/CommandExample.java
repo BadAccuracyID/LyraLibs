@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor
-public class CommandExampleInfo {
+public class CommandExample {
 
     private final String example;
     private final Map<String, String> descriptionMap;
@@ -23,6 +23,7 @@ public class CommandExampleInfo {
 
         /**
          * It adds an example to the command
+         * Example: /message LyraMS hi
          *
          * @param example The example of the command.
          * @return The CommandExampleInfoBuilder object.
@@ -34,8 +35,12 @@ public class CommandExampleInfo {
 
         /**
          * It adds a description to the command
+         * <p>
+         * Example:
+         * LyraMS = "The player Name"
+         * hi = "The message"
          *
-         * @param usage The usage of the command.
+         * @param usage   The usage of the command.
          * @param example The example command.
          * @return The CommandExampleInfoBuilder object.
          */
@@ -49,8 +54,8 @@ public class CommandExampleInfo {
          *
          * @return A new CommandExampleInfo object.
          */
-        public CommandExampleInfo build() {
-            return new CommandExampleInfo(this.example, this.descriptionMap);
+        public CommandExample build() {
+            return new CommandExample(this.example, this.descriptionMap);
         }
     }
 }
