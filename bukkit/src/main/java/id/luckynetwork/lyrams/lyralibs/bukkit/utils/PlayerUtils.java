@@ -1,5 +1,6 @@
 package id.luckynetwork.lyrams.lyralibs.bukkit.utils;
 
+import com.google.common.base.Charsets;
 import id.luckynetwork.lyrams.lyralibs.bukkit.LyraLibsBukkit;
 import lombok.experimental.UtilityClass;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 @UtilityClass
 public class PlayerUtils {
@@ -16,8 +18,8 @@ public class PlayerUtils {
     /**
      * It sets a metadata value for a player
      *
-     * @param player The player to apply the metadata to.
-     * @param metadataKey The key of the metadata.
+     * @param player        The player to apply the metadata to.
+     * @param metadataKey   The key of the metadata.
      * @param metadataValue The value of the metadata.
      */
     public void applyMetadata(Player player, String metadataKey, Object metadataValue) {
@@ -27,7 +29,7 @@ public class PlayerUtils {
     /**
      * If the player has the metadata, return the first value in the list of metadata values
      *
-     * @param player The player to get the metadata from.
+     * @param player      The player to get the metadata from.
      * @param metadataKey The key of the metadata to get.
      * @return The first metadata value of the player with the given key.
      */
@@ -104,6 +106,23 @@ public class PlayerUtils {
         }
 
         return false;
+    }
+
+    /**
+     * Gets the offline UUID of a player
+     *
+     * @param playerName The name of the player you want to get the UUID of.
+     * @return The offline UUID of the player.
+     */
+    public UUID getOfflineUUID(String playerName) {
+        return UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes(Charsets.UTF_8));
+    }
+
+    /**
+     * see {@link PlayerUtils#getOfflineUUID(String)}
+     */
+    public UUID getOfflineUUID(Player player) {
+        return PlayerUtils.getOfflineUUID(player.getName());
     }
 
 }
