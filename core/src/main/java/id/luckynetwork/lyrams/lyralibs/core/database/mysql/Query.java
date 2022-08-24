@@ -1,13 +1,15 @@
 package id.luckynetwork.lyrams.lyralibs.core.database.mysql;
 
 import id.luckynetwork.lyrams.lyralibs.core.closer.Closer;
+import id.luckynetwork.lyrams.lyralibs.core.database.mysql.result.DefaultResult;
+import id.luckynetwork.lyrams.lyralibs.core.database.mysql.result.HikariResult;
+import id.luckynetwork.lyrams.lyralibs.core.database.mysql.result.Results;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Objects;
 
 @AllArgsConstructor
 public class Query {
@@ -20,7 +22,7 @@ public class Query {
      */
     public void execute() throws SQLException {
         try (Closer closer = new Closer()) {
-            Connection connection = mySQL.isUseHikari() ? closer.add(Objects.requireNonNull(mySQL.getHikariDataSource()).getConnection()) : mySQL.getConnection();
+            Connection connection = mySQL.isUseHikari() ? closer.add(mySQL.getConnection()) : mySQL.getConnection();
             Statement statement = closer.add(connection.createStatement());
 
             statement.execute(sqlQuery);
@@ -35,8 +37,11 @@ public class Query {
     public Results getResults() throws SQLException {
         Connection connection = mySQL.getConnection();
         Statement statement = connection.createStatement();
-
         ResultSet set = statement.executeQuery(sqlQuery);
-        return new Results(connection, statement, set);
+
+        if (mySQL.isUseHikari()) {
+            return new HikariResult(connection, statement, set);
+        }
+        return new DefaultResult(connection, statement, set);
     }
 }

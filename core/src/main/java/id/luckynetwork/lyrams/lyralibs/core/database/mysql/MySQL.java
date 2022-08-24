@@ -3,6 +3,7 @@ package id.luckynetwork.lyrams.lyralibs.core.database.mysql;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import id.luckynetwork.lyrams.lyralibs.core.closer.Closer;
+import id.luckynetwork.lyrams.lyralibs.core.database.mysql.result.Results;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,13 +53,7 @@ public class MySQL {
         String url = this.formatUrl(this.host, this.port, this.database, this.useSSL);
 
         if (useHikari) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException ignored) {
-            }
-
             HikariConfig config = new HikariConfig();
-            config.setDriverClassName("com.mysql.cj.jdbc.Driver");
             config.setJdbcUrl(url);
             config.setMaximumPoolSize(20);
 
@@ -71,7 +66,7 @@ public class MySQL {
             config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
             config.addDataSourceProperty("autoReconnect", "true");
 
-            hikariDataSource = new HikariDataSource(config);
+            this.hikariDataSource = new HikariDataSource(config);
         } else {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
