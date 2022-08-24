@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.util.Map;
 
 /**
- * credit to Alviann (https://github.com/Alviannn/DependencyHelper)
+ * credit to Alviann (<a href="https://github.com/Alviannn/DependencyHelper">...</a>)
  */
 public class DependencyHelper {
 

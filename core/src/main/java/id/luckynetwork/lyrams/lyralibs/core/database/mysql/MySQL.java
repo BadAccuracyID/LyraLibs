@@ -123,10 +123,12 @@ public class MySQL {
         boolean connected = false;
 
         try (Closer closer = new Closer()) {
-            if (useHikari && hikariDataSource != null) {
-                Connection hikariConnection = closer.add(hikariDataSource.getConnection());
-                connected = hikariConnection != null && !hikariConnection.isClosed() && hikariConnection.isValid(1);
-            } else if (!useHikari) {
+            if (useHikari) {
+                if (hikariDataSource != null && !hikariDataSource.isClosed()) {
+                    Connection hikariConnection = closer.add(hikariDataSource.getConnection());
+                    connected = hikariConnection != null && !hikariConnection.isClosed() && hikariConnection.isValid(1);
+                }
+            } else {
                 connected = this.connection != null && !this.connection.isClosed() && this.connection.isValid(1);
             }
         } catch (SQLException e) {

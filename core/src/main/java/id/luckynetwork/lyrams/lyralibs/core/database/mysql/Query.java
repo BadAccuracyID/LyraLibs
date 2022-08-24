@@ -20,7 +20,7 @@ public class Query {
      */
     public void execute() throws SQLException {
         try (Closer closer = new Closer()) {
-            Connection connection = mySQL.isUseHikari() ? closer.add(Objects.requireNonNull(mySQL.getHikariDataSource()).getConnection()) : mySQL.getConnection();
+            Connection connection = mySQL.isUseHikari() ? closer.add(Objects.requireNonNull(mySQL.getHikariDataSource()).getConnection()) : closer.add(mySQL.getConnection());
             Statement statement = closer.add(connection.createStatement());
 
             statement.execute(sqlQuery);
